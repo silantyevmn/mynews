@@ -9,6 +9,7 @@ import io.paperdb.Paper;
 import silantyevmn.ru.mynews.di.*;
 
 public class App extends Application {
+    
     private static App instance;
     private AppComponent component;
 
