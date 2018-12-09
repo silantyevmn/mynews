@@ -11,4 +11,6 @@ public interface StartView extends MvpView {
 
     @StateStrategyType(SkipStrategy.class)
     void showError(String errorTextMessage);
+
+    void initToolbar(String titleToolbar);
 }
