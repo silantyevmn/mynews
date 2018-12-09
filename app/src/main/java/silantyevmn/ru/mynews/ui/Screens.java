@@ -4,14 +4,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 
-import java.util.List;
-
 import ru.terrakok.cicerone.android.support.SupportAppScreen;
 import silantyevmn.ru.mynews.model.entity.Articles;
 import silantyevmn.ru.mynews.ui.activity.StartActivity;
+import silantyevmn.ru.mynews.ui.activity.WebActivity;
+import silantyevmn.ru.mynews.ui.fragment.BookmarksFragment;
+import silantyevmn.ru.mynews.ui.fragment.CategoryFragment;
 import silantyevmn.ru.mynews.ui.fragment.HomeFragment;
 import silantyevmn.ru.mynews.ui.fragment.SearchFragment;
-import silantyevmn.ru.mynews.ui.fragment.WebFragment;
 
 public class Screens {
     public static final class StartScreen extends SupportAppScreen {
@@ -52,8 +52,30 @@ public class Screens {
         }
 
         @Override
+        public Intent getActivityIntent(Context context) {
+            Intent webIntent = new Intent(context, WebActivity.class);
+            webIntent.putExtra(WebActivity.KEY_WEB, articles);
+            return webIntent;
+        }
+    }
+
+    public static final class BookmarksScreen extends SupportAppScreen {
+        public BookmarksScreen() {
+        }
+
+        @Override
         public Fragment getFragment() {
-            return WebFragment.getNewInstance(articles);
+            return BookmarksFragment.getNewInstance();
+        }
+    }
+
+    public static final class CategoryScreen extends SupportAppScreen {
+        public CategoryScreen() {
+        }
+
+        @Override
+        public Fragment getFragment() {
+            return CategoryFragment.getNewInstance();
         }
     }
 }
