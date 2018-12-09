@@ -15,15 +15,9 @@ import silantyevmn.ru.mynews.utils.PopurManager;
 
 @InjectViewState
 public class WebPresenter extends MvpPresenter<WebNewsView> {
-
-    private Scheduler scheduler;
-    private Router router;
     private Articles articles;
 
-    @SuppressLint("CheckResult")
-    public WebPresenter(Scheduler scheduler, Router router, Articles articles) {
-        this.scheduler = scheduler;
-        this.router = router;
+    public WebPresenter(Articles articles) {
         this.articles = articles;
     }
 
@@ -46,9 +40,5 @@ public class WebPresenter extends MvpPresenter<WebNewsView> {
             getViewState().loadWebNews(articles);
         }
 
-    }
-
-    public void onBackPressed() {
-        router.exit();
     }
 }
