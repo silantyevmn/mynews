@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -23,6 +24,7 @@ import ru.terrakok.cicerone.Router;
 import silantyevmn.ru.mynews.App;
 import silantyevmn.ru.mynews.R;
 import silantyevmn.ru.mynews.model.image.ImageLoader;
+import silantyevmn.ru.mynews.ui.activity.StartActivity;
 import silantyevmn.ru.mynews.ui.popup.PopupDialogMessage;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.presenter.SearchPresenter;
@@ -35,6 +37,7 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
     private RecyclerAdapter adapter;
     private RecyclerView recyclerView;
     private Toolbar toolbar;
+
     @Inject
     PopupDialogMessage popupWindow;
 
@@ -74,23 +77,12 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         recyclerView = view.findViewById(R.id.recycler_search);
-        toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar = ((StartActivity)getActivity()).getToolbar();
         return view;
     }
 
     @Override
     public void init() {
-        toolbar.setTitle(R.string.search_title);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-        toolbar.setNavigationOnClickListener(l -> {
-            //закрываем строку поиска при нажатии назад
-            MenuItem item = toolbar.getMenu().findItem(R.id.search);
-            SearchView searchView = (SearchView) item.getActionView();
-            searchView.onActionViewCollapsed();
-            //возвращаемся к предыдущему фрагменту
-            onBackPressed();
-        });
-
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
@@ -105,7 +97,7 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
 
     @Override
     public void showError(String text) {
-        popupWindow.error(getView(),text+"_search_fragment");
+        popupWindow.error(getView(),text);
     }
 
     @Override
@@ -116,15 +108,29 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
     @Override
     public void onResume() {
         super.onResume();
+        initToolbar(presenter.getQuery());
         presenter.loadSearchNews();
-        if (toolbar != null) {
-            toolbar.setTitle(R.string.search_title);
-        }
+    }
+
+    private void initToolbar(String query) {
+        toolbar.getMenu().findItem(R.id.search).setVisible(false); //убираем значок поиска
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp); //выводим кнопку назад
+        toolbar.setNavigationOnClickListener(l -> {
+            onBackPressed();
+        });
+    }
+
+    private void closeToolbar() {
+        toolbar.getMenu().findItem(R.id.search).setVisible(true); //возвращаем значок поиска
+        toolbar.setNavigationIcon(null); //убираем кнопку назад
+        toolbar.setNavigationOnClickListener(null);
     }
 
     @Override
     public boolean onBackPressed() {
+        closeToolbar();
         presenter.onBackPressed();
         return true;
     }
+
 }
