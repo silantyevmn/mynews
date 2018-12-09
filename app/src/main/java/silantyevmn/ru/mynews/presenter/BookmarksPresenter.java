@@ -1,7 +1,6 @@
 package silantyevmn.ru.mynews.presenter;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -16,12 +15,13 @@ import silantyevmn.ru.mynews.model.entity.Articles;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.ui.Screens;
 import silantyevmn.ru.mynews.ui.adapter.IAdapter;
+import silantyevmn.ru.mynews.ui.view.BookmarksView;
 import silantyevmn.ru.mynews.ui.view.HomeView;
 import silantyevmn.ru.mynews.utils.Messages;
 import silantyevmn.ru.mynews.utils.NetworkStatus;
 
 @InjectViewState
-public class HomePresenter extends MvpPresenter<HomeView> implements IAdapter {
+public class BookmarksPresenter extends MvpPresenter<BookmarksView> implements IAdapter {
 
     private Scheduler scheduler;
     private Router router;
@@ -33,7 +33,7 @@ public class HomePresenter extends MvpPresenter<HomeView> implements IAdapter {
     }
 
     @SuppressLint("CheckResult")
-    public HomePresenter(Scheduler scheduler, Router router, Repo repo) {
+    public BookmarksPresenter(Scheduler scheduler, Router router, Repo repo) {
         this.scheduler = scheduler;
         this.router = router;
         this.repo = repo;
@@ -45,8 +45,11 @@ public class HomePresenter extends MvpPresenter<HomeView> implements IAdapter {
         getViewState().init();
     }
 
-    public void loadNews() {
-        repo.getTopNews()
+    public void loadBookmarks() {
+        //загрузка списка закладок
+        //если лист пустой то показываем текст, иначе список
+
+        /*repo.getTopNews()
                 .subscribeOn(Schedulers.io())
                 .observeOn(scheduler)
                 .subscribe(news -> {
@@ -54,7 +57,7 @@ public class HomePresenter extends MvpPresenter<HomeView> implements IAdapter {
                     getViewState().updateList();
                 }, throwable -> {
                     getViewState().showError(Messages.getErrorLoadNetwork());
-                });
+                });*/
     }
 
     @Override
