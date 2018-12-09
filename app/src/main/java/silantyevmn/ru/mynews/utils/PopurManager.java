@@ -5,7 +5,6 @@ import android.content.Intent;
 import silantyevmn.ru.mynews.App;
 import silantyevmn.ru.mynews.R;
 import silantyevmn.ru.mynews.model.entity.Articles;
-import silantyevmn.ru.mynews.utils.NetworkStatus;
 
 /**
  * Created by silan on 03.12.2018.
@@ -19,7 +18,7 @@ public class PopurManager {
             intentShare.setType("text/html");
             intentShare.putExtra(Intent.EXTRA_TEXT, articles.getUrl());
 
-            Intent share= Intent.createChooser(intentShare, App.getInstance().getString(R.string.share_title));
+            Intent share= Intent.createChooser(intentShare, App.getInstance().getString(R.string.title_share));
             share.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             App.getInstance().startActivity(share);
