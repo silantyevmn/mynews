@@ -6,11 +6,11 @@ import com.arellomobile.mvp.viewstate.strategy.SkipStrategy;
 import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
-public interface StartView extends MvpView {
+public interface CategoryView extends MvpView {
     void init();
 
-    @StateStrategyType(SkipStrategy.class)
-    void showError(String errorTextMessage);
+    void updateList();
 
-    void initToolbar(String titleToolbar);
+    @StateStrategyType(SkipStrategy.class)
+    void showError(String text);
 }
