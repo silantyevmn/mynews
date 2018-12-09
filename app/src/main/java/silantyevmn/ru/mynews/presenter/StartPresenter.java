@@ -4,6 +4,7 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
 import ru.terrakok.cicerone.Router;
+import ru.terrakok.cicerone.android.support.SupportAppScreen;
 import silantyevmn.ru.mynews.ui.Screens;
 import silantyevmn.ru.mynews.ui.view.StartView;
 import silantyevmn.ru.mynews.utils.Messages;
@@ -31,15 +32,41 @@ public class StartPresenter extends MvpPresenter<StartView> {
         router.replaceScreen(new Screens.StartScreen());
     }
 
-    public void toMainScreen() {
-        router.replaceScreen(new Screens.HomeScreen());
+    public void homeScreen(String titleToolbar) {
+        replaceScreen(titleToolbar,new Screens.HomeScreen());
     }
 
     public void searchNewsScreen(String query) {
-        if (!NetworkStatus.isInternetAvailable()) {
-            getViewState().showError(Messages.getErrorNoInternetConnection());
-            return;
+        navigationToScreen(query, new Screens.SearchScreen(query));
+    }
+
+    public void categoryScreen(String titleToolbar) {
+        replaceScreen(titleToolbar,new Screens.CategoryScreen());
+    }
+
+    public void bookmarksScreen(String titleToolbar) {
+        replaceScreen(titleToolbar, new Screens.BookmarksScreen());
+    }
+
+    private void replaceScreen(String titleToolbar, SupportAppScreen supportAppScreen) {
+        if (isInternetAvailable()) {
+            router.replaceScreen(supportAppScreen);
+            getViewState().initToolbar(titleToolbar);
         }
-        router.navigateTo(new Screens.SearchScreen(query));
+    }
+
+    private void navigationToScreen(String titleToolbar, SupportAppScreen supportAppScreen) {
+        if (isInternetAvailable()) {
+            router.navigateTo(supportAppScreen);
+            getViewState().initToolbar(titleToolbar);
+        }
+    }
+
+    private boolean isInternetAvailable() {
+        boolean isInternetOnline = NetworkStatus.isInternetAvailable();
+        if (!isInternetOnline) {
+            getViewState().showError(Messages.getErrorNoInternetConnection());
+        }
+        return isInternetOnline;
     }
 }
