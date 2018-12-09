@@ -5,13 +5,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -24,12 +21,12 @@ import ru.terrakok.cicerone.Router;
 import silantyevmn.ru.mynews.App;
 import silantyevmn.ru.mynews.R;
 import silantyevmn.ru.mynews.model.image.ImageLoader;
-import silantyevmn.ru.mynews.ui.activity.StartActivity;
-import silantyevmn.ru.mynews.ui.popup.PopupDialogMessage;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.presenter.SearchPresenter;
+import silantyevmn.ru.mynews.ui.activity.StartActivity;
 import silantyevmn.ru.mynews.ui.adapter.RecyclerAdapter;
 import silantyevmn.ru.mynews.ui.common.BackButtonListener;
+import silantyevmn.ru.mynews.ui.popup.PopupDialogMessage;
 import silantyevmn.ru.mynews.ui.view.SearchNewsView;
 
 public class SearchFragment extends MvpAppCompatFragment implements SearchNewsView, BackButtonListener {
@@ -77,7 +74,7 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         recyclerView = view.findViewById(R.id.recycler_search);
-        toolbar = ((StartActivity)getActivity()).getToolbar();
+        toolbar = ((StartActivity) getActivity()).getToolbar();
         return view;
     }
 
@@ -97,22 +94,22 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
 
     @Override
     public void showError(String text) {
-        popupWindow.error(getView(),text);
+        popupWindow.error(getView(), text);
     }
 
     @Override
     public void showMessage(String text) {
-        popupWindow.into(getView(),text);
+        popupWindow.into(getView(), text);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        initToolbar(presenter.getQuery());
+        initToolbar();
         presenter.loadSearchNews();
     }
 
-    private void initToolbar(String query) {
+    private void initToolbar() {
         toolbar.getMenu().findItem(R.id.search).setVisible(false); //убираем значок поиска
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp); //выводим кнопку назад
         toolbar.setNavigationOnClickListener(l -> {

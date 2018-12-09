@@ -15,7 +15,7 @@ import silantyevmn.ru.mynews.model.entity.Articles;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.ui.Screens;
 import silantyevmn.ru.mynews.ui.adapter.IAdapter;
-import silantyevmn.ru.mynews.ui.view.*;
+import silantyevmn.ru.mynews.ui.view.SearchNewsView;
 import silantyevmn.ru.mynews.utils.Messages;
 import silantyevmn.ru.mynews.utils.NetworkStatus;
 
@@ -33,11 +33,11 @@ public class SearchPresenter extends MvpPresenter<SearchNewsView> implements IAd
     }
 
     @SuppressLint("CheckResult")
-    public SearchPresenter(Scheduler scheduler, Router router, Repo repo,String query) {
+    public SearchPresenter(Scheduler scheduler, Router router, Repo repo, String query) {
         this.scheduler = scheduler;
         this.router = router;
         this.repo = repo;
-        this.query=query;
+        this.query = query;
     }
 
     @Override
