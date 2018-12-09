@@ -12,6 +12,7 @@
 
     <style name="MainToolbar">
         <item name="android:background">@color/colorWhite</item>
+        <item name="android:textColor">@color/colorBlack</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Light</item>
     </style>
 
