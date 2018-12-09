@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,17 +22,16 @@ import ru.terrakok.cicerone.Router;
 import silantyevmn.ru.mynews.App;
 import silantyevmn.ru.mynews.R;
 import silantyevmn.ru.mynews.model.image.ImageLoader;
-import silantyevmn.ru.mynews.ui.activity.StartActivity;
-import silantyevmn.ru.mynews.ui.popup.PopupDialogMessage;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.presenter.HomePresenter;
+import silantyevmn.ru.mynews.ui.activity.StartActivity;
 import silantyevmn.ru.mynews.ui.adapter.RecyclerAdapter;
 import silantyevmn.ru.mynews.ui.common.BackButtonListener;
+import silantyevmn.ru.mynews.ui.popup.PopupDialogMessage;
 import silantyevmn.ru.mynews.ui.view.HomeView;
 
 public class HomeFragment extends MvpAppCompatFragment implements HomeView, BackButtonListener, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerAdapter adapter;
-    private Toolbar toolbar;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
@@ -73,7 +71,6 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        toolbar = ((StartActivity)getActivity()).getToolbar();
         recyclerView = view.findViewById(R.id.recycler_home);
         mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
@@ -116,13 +113,10 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
     @Override
     public void onResume() {
         super.onResume();
+        ((StartActivity) getActivity()).initToolbar(getString(R.string.title_home));
         presenter.loadNews();
-        if(recyclerViewState!=null){
+        if (recyclerViewState != null) {
             recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);//restore
-        }
-        if (toolbar != null) {
-            toolbar.setTitle(R.string.home_title);
-            toolbar.setNavigationIcon(null);
         }
     }
 
