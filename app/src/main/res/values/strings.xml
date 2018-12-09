@@ -2,9 +2,14 @@
     <string name="app_name">MyNews</string>
     <string name="no_internet_connection">Отсутствует интернет соединение</string>
     <string name="check_connection_settings">Проверьте настройки сети</string>
-    <string name="share_title">Поделиться</string>
-    <string name="home_title">Главная</string>
-    <string name="search_title">Поиск</string>
+    <string name="title_home">Home</string>
+    <string name="title_search">Search</string>
+    <string name="title_bookmarks">Bookmarks</string>
+    <string name="title_category">Category</string>
     <string name="error_load_network">Ошибка при загрузке из сети</string>
+    <string name="bottom_navigation_view_behavior">"silantyevmn.ru.mynews.ui.BottonNavigationViewHideOnScrollBehavior"</string>
+    <string name="title_share">Поделиться</string>
+    <string name="title_copy">Скопировать</string>
+    <string name="title_openInBrowser">Открыть в браузере</string>
 
 </resources>

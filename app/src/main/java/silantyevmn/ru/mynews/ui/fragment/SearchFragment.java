@@ -5,10 +5,8 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -23,11 +21,12 @@ import ru.terrakok.cicerone.Router;
 import silantyevmn.ru.mynews.App;
 import silantyevmn.ru.mynews.R;
 import silantyevmn.ru.mynews.model.image.ImageLoader;
-import silantyevmn.ru.mynews.ui.popup.PopupDialogMessage;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.presenter.SearchPresenter;
+import silantyevmn.ru.mynews.ui.activity.StartActivity;
 import silantyevmn.ru.mynews.ui.adapter.RecyclerAdapter;
 import silantyevmn.ru.mynews.ui.common.BackButtonListener;
+import silantyevmn.ru.mynews.ui.popup.PopupDialogMessage;
 import silantyevmn.ru.mynews.ui.view.SearchNewsView;
 
 public class SearchFragment extends MvpAppCompatFragment implements SearchNewsView, BackButtonListener {
@@ -35,6 +34,7 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
     private RecyclerAdapter adapter;
     private RecyclerView recyclerView;
     private Toolbar toolbar;
+
     @Inject
     PopupDialogMessage popupWindow;
 
@@ -74,23 +74,12 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         recyclerView = view.findViewById(R.id.recycler_search);
-        toolbar = getActivity().findViewById(R.id.toolbar);
+        toolbar = ((StartActivity) getActivity()).getToolbar();
         return view;
     }
 
     @Override
     public void init() {
-        toolbar.setTitle(R.string.search_title);
-        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp);
-        toolbar.setNavigationOnClickListener(l -> {
-            //закрываем строку поиска при нажатии назад
-            MenuItem item = toolbar.getMenu().findItem(R.id.search);
-            SearchView searchView = (SearchView) item.getActionView();
-            searchView.onActionViewCollapsed();
-            //возвращаемся к предыдущему фрагменту
-            onBackPressed();
-        });
-
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
@@ -105,26 +94,40 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
 
     @Override
     public void showError(String text) {
-        popupWindow.error(getView(),text+"_search_fragment");
+        popupWindow.error(getView(), text);
     }
 
     @Override
     public void showMessage(String text) {
-        popupWindow.into(getView(),text);
+        popupWindow.into(getView(), text);
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        initToolbar();
         presenter.loadSearchNews();
-        if (toolbar != null) {
-            toolbar.setTitle(R.string.search_title);
-        }
+    }
+
+    private void initToolbar() {
+        toolbar.getMenu().findItem(R.id.search).setVisible(false); //убираем значок поиска
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp); //выводим кнопку назад
+        toolbar.setNavigationOnClickListener(l -> {
+            onBackPressed();
+        });
+    }
+
+    private void closeToolbar() {
+        toolbar.getMenu().findItem(R.id.search).setVisible(true); //возвращаем значок поиска
+        toolbar.setNavigationIcon(null); //убираем кнопку назад
+        toolbar.setNavigationOnClickListener(null);
     }
 
     @Override
     public boolean onBackPressed() {
+        closeToolbar();
         presenter.onBackPressed();
         return true;
     }
+
 }

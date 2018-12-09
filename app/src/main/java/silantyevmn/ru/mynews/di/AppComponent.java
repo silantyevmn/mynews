@@ -8,9 +8,11 @@ import silantyevmn.ru.mynews.di.modules.NavigationModule;
 import silantyevmn.ru.mynews.di.modules.PopupWindowModule;
 import silantyevmn.ru.mynews.di.modules.RepoModule;
 import silantyevmn.ru.mynews.ui.activity.StartActivity;
+import silantyevmn.ru.mynews.ui.activity.WebActivity;
+import silantyevmn.ru.mynews.ui.fragment.BookmarksFragment;
+import silantyevmn.ru.mynews.ui.fragment.CategoryFragment;
 import silantyevmn.ru.mynews.ui.fragment.HomeFragment;
 import silantyevmn.ru.mynews.ui.fragment.SearchFragment;
-import silantyevmn.ru.mynews.ui.fragment.WebFragment;
 
 @Singleton
 @Component(modules = {
@@ -26,6 +28,10 @@ public interface AppComponent {
 
     void inject(SearchFragment searchFragment);
 
-    void inject(WebFragment webFragment);
+    void inject(WebActivity webActivity);
+
+    void inject(BookmarksFragment bookmarksFragment);
+
+    void inject(CategoryFragment categoryFragment);
 
 }
