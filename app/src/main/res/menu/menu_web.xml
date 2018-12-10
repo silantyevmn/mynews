@@ -19,8 +19,8 @@
         android:title="@string/title_openInBrowser" />
 
     <item
-        android:id="@+id/web_menu_bookmarks"
-        android:icon="@drawable/ic_collections_bookmark_black_24dp"
+        android:id="@+id/web_menu_bookmark"
+        android:icon="@drawable/ic_bookmark_border_black_24dp"
         android:title="@string/title_bookmarks"
         app:showAsAction="always" />
 </menu>
