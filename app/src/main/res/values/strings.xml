@@ -11,5 +11,8 @@
     <string name="title_share">Поделиться</string>
     <string name="title_copy">Скопировать</string>
     <string name="title_openInBrowser">Открыть в браузере</string>
+    <string name="error_load_cache">Ошибка при загрузке из кеша</string>
+    <string name="bookmark_remove">Удалить закладку</string>
+    <string name="bookmark_add">Добавить закладку</string>
 
 </resources>
