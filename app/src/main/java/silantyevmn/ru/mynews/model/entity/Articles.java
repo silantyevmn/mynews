@@ -85,4 +85,11 @@ public class Articles implements Serializable{
     public String getContent() {
         return content;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Articles)) return false;
+        return this.url.equals(((Articles) obj).getUrl());
+    }
 }

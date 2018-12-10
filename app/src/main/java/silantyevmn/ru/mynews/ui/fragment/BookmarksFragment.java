@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -32,6 +33,7 @@ import silantyevmn.ru.mynews.ui.view.BookmarksView;
 public class BookmarksFragment extends MvpAppCompatFragment implements BookmarksView, BackButtonListener {
     private RecyclerAdapter adapter;
     private RecyclerView recyclerView;
+    private TextView bookmarksTextView;
 
     private Parcelable recyclerViewState; //храним состояние списка
 
@@ -70,6 +72,7 @@ public class BookmarksFragment extends MvpAppCompatFragment implements Bookmarks
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bookmarks, container, false);
         recyclerView = view.findViewById(R.id.bookmarks_recycler);
+        bookmarksTextView= view.findViewById(R.id.bookmarks_text_view);
         return view;
     }
 
@@ -91,6 +94,16 @@ public class BookmarksFragment extends MvpAppCompatFragment implements Bookmarks
     @Override
     public void showError(String text) {
         popupWindow.error(getView(), text);
+    }
+
+    @Override
+    public void showHeadpiece() {
+        bookmarksTextView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideHeadpiece() {
+        bookmarksTextView.setVisibility(View.GONE);
     }
 
     @Override

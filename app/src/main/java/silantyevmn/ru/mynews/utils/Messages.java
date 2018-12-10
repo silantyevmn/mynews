@@ -16,4 +16,8 @@ public class Messages {
     public static String getErrorLoadNetwork(){
         return App.getInstance().getString(R.string.error_load_network);
     }
+
+    public static String getErrorLoadCache() {
+        return App.getInstance().getString(R.string.error_load_cache);
+    }
 }

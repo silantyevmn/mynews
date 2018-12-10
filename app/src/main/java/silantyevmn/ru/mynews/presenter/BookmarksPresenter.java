@@ -16,7 +16,6 @@ import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.ui.Screens;
 import silantyevmn.ru.mynews.ui.adapter.IAdapter;
 import silantyevmn.ru.mynews.ui.view.BookmarksView;
-import silantyevmn.ru.mynews.ui.view.HomeView;
 import silantyevmn.ru.mynews.utils.Messages;
 import silantyevmn.ru.mynews.utils.NetworkStatus;
 
@@ -47,17 +46,21 @@ public class BookmarksPresenter extends MvpPresenter<BookmarksView> implements I
 
     public void loadBookmarks() {
         //загрузка списка закладок
-        //если лист пустой то показываем текст, иначе список
-
-        /*repo.getTopNews()
+        //если лист пустой то показываем заставку, иначе список
+        repo.getBookmarksList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(scheduler)
-                .subscribe(news -> {
-                    this.articlesList = news.getArticles();
+                .subscribe(favoriteList -> {
+                    articlesList = favoriteList;
+                    if (favoriteList.size() == 0) {
+                        getViewState().showHeadpiece();//покажем заставку
+                    } else {
+                        getViewState().hideHeadpiece();//скроем заставку
+                    }
                     getViewState().updateList();
                 }, throwable -> {
-                    getViewState().showError(Messages.getErrorLoadNetwork());
-                });*/
+                    getViewState().showError(Messages.getErrorLoadCache());
+                });
     }
 
     @Override

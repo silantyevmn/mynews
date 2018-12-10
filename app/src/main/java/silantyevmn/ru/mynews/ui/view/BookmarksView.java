@@ -13,4 +13,8 @@ public interface BookmarksView extends MvpView {
 
     @StateStrategyType(SkipStrategy.class)
     void showError(String text);
+
+    void showHeadpiece();
+
+    void hideHeadpiece();
 }

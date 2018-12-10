@@ -1,12 +1,13 @@
 package silantyevmn.ru.mynews.model.repo;
 
+import java.util.List;
+
 import io.reactivex.Observable;
 import silantyevmn.ru.mynews.model.api.ApiService;
 import silantyevmn.ru.mynews.model.cache.Cache;
+import silantyevmn.ru.mynews.model.entity.Articles;
 import silantyevmn.ru.mynews.model.entity.News;
 import silantyevmn.ru.mynews.utils.LocaleManager;
-import silantyevmn.ru.mynews.utils.Messages;
-import silantyevmn.ru.mynews.utils.NetworkStatus;
 
 public class RepoNews implements Repo {
     private final String KEY_API = "e355d575a04c43fb9076a3ee6be5253d";
@@ -29,5 +30,20 @@ public class RepoNews implements Repo {
     @Override
     public Observable<News> getSearchNews(String newText) {
         return api.getNewsSearch(KEY_API, newText);
+    }
+
+    @Override
+    public Observable<List<Articles>> getBookmarksList() {
+        return cache.getBookmarksList();
+    }
+
+    @Override
+    public Observable<Boolean> updateBookmark(Articles articles) {
+        return cache.updateBookmark(articles);
+    }
+
+    @Override
+    public Observable<Boolean> findBookmark(Articles articles) {
+        return cache.findBookmark(articles);
     }
 }
