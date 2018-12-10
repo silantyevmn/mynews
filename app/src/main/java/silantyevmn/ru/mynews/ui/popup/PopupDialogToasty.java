@@ -17,4 +17,9 @@ public class PopupDialogToasty implements PopupDialogMessage {
     public void into(View view, String message) {
         Toasty.info(view.getContext(), message, duration, withicon).show();
     }
+
+    @Override
+    public void onSuccess(View view, String message) {
+        Toasty.success(view.getContext(), message, duration, withicon).show();
+    }
 }
