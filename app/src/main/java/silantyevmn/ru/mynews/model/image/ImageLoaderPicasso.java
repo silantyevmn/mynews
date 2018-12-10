@@ -15,26 +15,28 @@ public class ImageLoaderPicasso implements ImageLoader<ImageView> {
     public void loadIconTitle(@Nullable String url, ImageView imageSmall) {
         String baseUrl = Uri.parse(url).getHost();
         String path = String.format("https://besticon-demo.herokuapp.com/icon?url=%s&size=32..64..64", baseUrl);
-        show(path,imageSmall);
+        show(path, imageSmall);
     }
 
     @Override
-    public void loadIcon(@Nullable String url,String UrlToImage, ImageView image) {
+    public void loadIcon(@Nullable String url, String UrlToImage, ImageView image) {
         String baseUrl = Uri.parse(url).getHost();
         String path = "";
-        if(TextUtils.isEmpty(UrlToImage)){
+        if (TextUtils.isEmpty(UrlToImage)) {
             path = String.format("https://besticon-demo.herokuapp.com/icon?url=%s&size=64..100..120", baseUrl);
         } else {
             path = UrlToImage;
         }
-        show(path,image);
+        show(path, image);
     }
 
-    private void show(String url,ImageView container){
+    private void show(String url, ImageView container) {
         Picasso.get()
                 .load(url)
                 .placeholder(R.drawable.ic_autorenew_black_24dp)
                 .error(R.drawable.ic_crop_original_black_24dp)
+                .centerCrop(0)
+                .resize(88, 88)
                 .into(container);
     }
 
