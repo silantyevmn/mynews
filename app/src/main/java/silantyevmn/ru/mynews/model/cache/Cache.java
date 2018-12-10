@@ -4,10 +4,12 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import silantyevmn.ru.mynews.model.entity.Articles;
-import silantyevmn.ru.mynews.model.entity.News;
 
-public interface Cache{
-    void putAll(News list);
+public interface Cache {
 
-    Observable<News> getNews();
+    Observable<List<Articles>> getBookmarksList();
+
+    Observable<Boolean> updateBookmark(Articles articles);
+
+    Observable<Boolean> findBookmark(Articles articles);
 }
