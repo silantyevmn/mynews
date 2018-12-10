@@ -14,6 +14,9 @@ public interface WebNewsView extends MvpView {
     void loadWebNews(Articles articles);
 
     @StateStrategyType(SkipStrategy.class)
-    void showError(String errorString);
+    void showError(String message);
 
+    void onSuccess(String message);
+
+    void updateMenuItemBookmarkIcon(Boolean isFavorite);
 }
