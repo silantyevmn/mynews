@@ -7,8 +7,6 @@ import ru.terrakok.cicerone.Router;
 import ru.terrakok.cicerone.android.support.SupportAppScreen;
 import silantyevmn.ru.mynews.ui.Screens;
 import silantyevmn.ru.mynews.ui.view.StartView;
-import silantyevmn.ru.mynews.utils.Messages;
-import silantyevmn.ru.mynews.utils.NetworkStatus;
 
 @InjectViewState
 public class StartPresenter extends MvpPresenter<StartView> {
@@ -33,7 +31,7 @@ public class StartPresenter extends MvpPresenter<StartView> {
     }
 
     public void homeScreen(String titleToolbar) {
-        replaceScreen(titleToolbar,new Screens.HomeScreen());
+        replaceScreen(titleToolbar, new Screens.HomeScreen());
     }
 
     public void searchNewsScreen(String query) {
@@ -41,7 +39,7 @@ public class StartPresenter extends MvpPresenter<StartView> {
     }
 
     public void categoryScreen(String titleToolbar) {
-        replaceScreen(titleToolbar,new Screens.CategoryScreen());
+        replaceScreen(titleToolbar, new Screens.CategoryScreen());
     }
 
     public void bookmarksScreen(String titleToolbar) {
@@ -49,24 +47,12 @@ public class StartPresenter extends MvpPresenter<StartView> {
     }
 
     private void replaceScreen(String titleToolbar, SupportAppScreen supportAppScreen) {
-        if (isInternetAvailable()) {
-            router.replaceScreen(supportAppScreen);
-            getViewState().initToolbar(titleToolbar);
-        }
+        router.replaceScreen(supportAppScreen);
+        getViewState().initToolbar(titleToolbar);
     }
 
     private void navigationToScreen(String titleToolbar, SupportAppScreen supportAppScreen) {
-        if (isInternetAvailable()) {
-            router.navigateTo(supportAppScreen);
-            getViewState().initToolbar(titleToolbar);
-        }
-    }
-
-    private boolean isInternetAvailable() {
-        boolean isInternetOnline = NetworkStatus.isInternetAvailable();
-        if (!isInternetOnline) {
-            getViewState().showError(Messages.getErrorNoInternetConnection());
-        }
-        return isInternetOnline;
+        router.navigateTo(supportAppScreen);
+        getViewState().initToolbar(titleToolbar);
     }
 }
