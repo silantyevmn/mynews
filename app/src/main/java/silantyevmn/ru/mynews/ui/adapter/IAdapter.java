@@ -9,4 +9,10 @@ public interface IAdapter {
     List<Articles> getArticlesList();
 
     void startWebView(Articles articles);
+
+    void updateStatusBookmarks();
+
+    void showSuccess(String message);
+
+    void showError(String message);
 }

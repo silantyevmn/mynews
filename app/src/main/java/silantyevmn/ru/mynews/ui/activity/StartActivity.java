@@ -140,7 +140,7 @@ public class StartActivity extends MvpAppCompatActivity implements StartView {
 
     @Override
     public void showError(String errorTextMessage) {
-        popupWindow.error(getCurrentFocus(), errorTextMessage);
+        popupWindow.error(toolbar.getRootView(), errorTextMessage);
     }
 
     @Override

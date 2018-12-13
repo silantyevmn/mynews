@@ -14,5 +14,9 @@ public interface SearchNewsView extends MvpView {
     @StateStrategyType(SkipStrategy.class)
     void showError(String text);
 
-    void showMessage(String text);
+	@StateStrategyType(SkipStrategy.class)
+    void showInfo(String text);
+
+	@StateStrategyType(SkipStrategy.class)
+    void showSuccess(String message);
 }

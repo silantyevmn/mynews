@@ -72,7 +72,7 @@ public class BookmarksFragment extends MvpAppCompatFragment implements Bookmarks
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bookmarks, container, false);
         recyclerView = view.findViewById(R.id.bookmarks_recycler);
-        bookmarksTextView= view.findViewById(R.id.bookmarks_text_view);
+        bookmarksTextView = view.findViewById(R.id.bookmarks_text_view);
         return view;
     }
 
@@ -92,11 +92,6 @@ public class BookmarksFragment extends MvpAppCompatFragment implements Bookmarks
     }
 
     @Override
-    public void showError(String text) {
-        popupWindow.error(getView(), text);
-    }
-
-    @Override
     public void showHeadpiece() {
         bookmarksTextView.setVisibility(View.VISIBLE);
     }
@@ -104,6 +99,16 @@ public class BookmarksFragment extends MvpAppCompatFragment implements Bookmarks
     @Override
     public void hideHeadpiece() {
         bookmarksTextView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showSuccess(String message) {
+        popupWindow.onSuccess(getView(), message);
+    }
+
+    @Override
+    public void showError(String text) {
+        popupWindow.error(getView(), text);
     }
 
     @Override

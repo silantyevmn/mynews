@@ -60,11 +60,12 @@ public class WebActivity extends MvpAppCompatActivity implements WebNewsView {
     public void init(Articles articles) {
         webToolbar.setTitle(articles.getSource().getName());
         webToolbar.inflateMenu(R.menu.menu_web);
+        bookmarkMenuItem = webToolbar.getMenu().findItem(R.id.web_menu_bookmark);
         webToolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
         webToolbar.setNavigationOnClickListener(click -> {
             onBackPressed();
         });
-        bookmarkMenuItem = webToolbar.getMenu().findItem(R.id.web_menu_bookmark);
+
     }
 
     @Override
@@ -106,7 +107,7 @@ public class WebActivity extends MvpAppCompatActivity implements WebNewsView {
     }
 
     @Override
-    public void onSuccess(String text) {
+    public void showSuccess(String text) {
         popupWindow.onSuccess(webToolbar.getRootView(), text);
     }
 

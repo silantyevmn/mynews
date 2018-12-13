@@ -14,5 +14,9 @@
     <string name="error_load_cache">Ошибка при загрузке из кеша</string>
     <string name="bookmark_remove">Удалить закладку</string>
     <string name="bookmark_add">Добавить закладку</string>
+    <string name="error_update_bookmark">Ошибка при обновлении закладки</string>
+    <string name="bookmark_success_add">Закладка успешно добавлена.</string>
+    <string name="bookmark_success_remove">Закладка успешно удалена.</string>
+    <string name="error_find_status_bookmark">Ошибка при поиске статуса закладки.</string>
 
 </resources>

@@ -28,7 +28,7 @@ public class BookmarksPresenter extends MvpPresenter<BookmarksView> implements I
     private List<Articles> articlesList = new ArrayList<>();
 
     public List<Articles> getArticlesList() {
-        return articlesList;
+        return this.articlesList;
     }
 
     @SuppressLint("CheckResult")
@@ -45,13 +45,17 @@ public class BookmarksPresenter extends MvpPresenter<BookmarksView> implements I
     }
 
     public void loadBookmarks() {
+        if (!NetworkStatus.isInternetAvailable()) {
+            getViewState().showError(Messages.getErrorNoInternetConnection());
+            return;
+        }
         //загрузка списка закладок
         //если лист пустой то показываем заставку, иначе список
         repo.getBookmarksList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(scheduler)
                 .subscribe(favoriteList -> {
-                    articlesList = favoriteList;
+                    this.articlesList = favoriteList;
                     if (favoriteList.size() == 0) {
                         getViewState().showHeadpiece();//покажем заставку
                     } else {
@@ -65,12 +69,24 @@ public class BookmarksPresenter extends MvpPresenter<BookmarksView> implements I
 
     @Override
     public void startWebView(Articles articles) {
-        if (!NetworkStatus.isInternetAvailable()) {
-            getViewState().showError(Messages.getErrorNoInternetConnection());
-            return;
-        }
         router.navigateTo(new Screens.WebScreen(articles));
     }
+
+    @Override
+    public void updateStatusBookmarks() {
+        loadBookmarks();
+    }
+
+    @Override
+    public void showSuccess(String message) {
+        getViewState().showSuccess(message);
+    }
+
+    @Override
+    public void showError(String message) {
+        getViewState().showError(message);
+    }
+
 
     public void onBackPressed() {
         router.exit();

@@ -1,7 +1,6 @@
 package silantyevmn.ru.mynews.presenter;
 
 import android.annotation.SuppressLint;
-import android.util.Log;
 
 import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
@@ -46,6 +45,10 @@ public class HomePresenter extends MvpPresenter<HomeView> implements IAdapter {
     }
 
     public void loadNews() {
+        if (!NetworkStatus.isInternetAvailable()) {
+            getViewState().showError(Messages.getErrorNoInternetConnection());
+            return;
+        }
         repo.getTopNews()
                 .subscribeOn(Schedulers.io())
                 .observeOn(scheduler)
@@ -59,11 +62,22 @@ public class HomePresenter extends MvpPresenter<HomeView> implements IAdapter {
 
     @Override
     public void startWebView(Articles articles) {
-        if (!NetworkStatus.isInternetAvailable()) {
-            getViewState().showError(Messages.getErrorNoInternetConnection());
-            return;
-        }
         router.navigateTo(new Screens.WebScreen(articles));
+    }
+
+    @Override
+    public void updateStatusBookmarks() {
+
+    }
+
+    @Override
+    public void showSuccess(String bookmarkRemoveOrAdd) {
+        getViewState().showSuccess(bookmarkRemoveOrAdd);
+    }
+
+    @Override
+    public void showError(String text) {
+        getViewState().showError(text);
     }
 
     public void onBackPressed() {
