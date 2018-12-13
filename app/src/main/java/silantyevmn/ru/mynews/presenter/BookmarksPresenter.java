@@ -45,10 +45,6 @@ public class BookmarksPresenter extends MvpPresenter<BookmarksView> implements I
     }
 
     public void loadBookmarks() {
-        if (!NetworkStatus.isInternetAvailable()) {
-            getViewState().showError(Messages.getErrorNoInternetConnection());
-            return;
-        }
         //загрузка списка закладок
         //если лист пустой то показываем заставку, иначе список
         repo.getBookmarksList()
