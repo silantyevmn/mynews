@@ -20,4 +20,28 @@ public class Messages {
     public static String getErrorLoadCache() {
         return App.getInstance().getString(R.string.error_load_cache);
     }
+
+    public static String getBookmarkAdd() {
+        return App.getInstance().getString(R.string.bookmark_add);
+    }
+
+    public static String getBookmarkRemove() {
+        return App.getInstance().getString(R.string.bookmark_remove);
+    }
+
+    public static String getErrorUpdateBookmark() {
+        return App.getInstance().getString(R.string.error_update_bookmark);
+    }
+
+    public static String getBookmarkSuccessAdd() {
+        return App.getInstance().getString(R.string.bookmark_success_add);
+    }
+
+    public static String getBookmarkSuccessRemove() {
+        return App.getInstance().getString(R.string.bookmark_success_remove);
+    }
+
+    public static String getErrorStatusBookmark() {
+        return App.getInstance().getString(R.string.error_find_status_bookmark);
+    }
 }
