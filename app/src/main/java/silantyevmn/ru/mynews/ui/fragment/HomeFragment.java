@@ -100,6 +100,11 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
     }
 
     @Override
+    public void showSuccess(String text) {
+        popupWindow.onSuccess(getView(), text);
+    }
+
+    @Override
     public void onRefresh() {
         presenter.loadNews();
     }
