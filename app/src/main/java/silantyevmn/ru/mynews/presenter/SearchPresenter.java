@@ -47,6 +47,10 @@ public class SearchPresenter extends MvpPresenter<SearchNewsView> implements IAd
     }
 
     public void loadSearchNews() {
+        if (!NetworkStatus.isInternetAvailable()) {
+            getViewState().showError(Messages.getErrorNoInternetConnection());
+            return;
+        }
         repo.getSearchNews(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(scheduler)
@@ -60,11 +64,22 @@ public class SearchPresenter extends MvpPresenter<SearchNewsView> implements IAd
 
     @Override
     public void startWebView(Articles articles) {
-        if (!NetworkStatus.isInternetAvailable()) {
-            getViewState().showError(Messages.getErrorNoInternetConnection());
-            return;
-        }
         router.navigateTo(new Screens.WebScreen(articles));
+    }
+
+    @Override
+    public void updateStatusBookmarks() {
+
+    }
+
+    @Override
+    public void showSuccess(String message) {
+        getViewState().showSuccess(message);
+    }
+
+    @Override
+    public void showError(String message) {
+        getViewState().showError(message);
     }
 
     public void onBackPressed() {
