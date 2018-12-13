@@ -61,7 +61,7 @@ public class BookmarksPresenter extends MvpPresenter<BookmarksView> implements I
                     } else {
                         getViewState().hideHeadpiece();//скроем заставку
                     }
-                    getViewState().updateList(favoriteList);
+                    getViewState().updateList();
                 }, throwable -> {
                     getViewState().showError(Messages.getErrorLoadCache());
                 });
