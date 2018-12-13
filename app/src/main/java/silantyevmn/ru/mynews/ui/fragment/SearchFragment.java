@@ -98,15 +98,13 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
     }
 
     @Override
-    public void showMessage(String text) {
+    public void showInfo(String text) {
         popupWindow.into(getView(), text);
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        initToolbar();
-        presenter.loadSearchNews();
+    public void showSuccess(String message) {
+        popupWindow.onSuccess(getView(), message);
     }
 
     private void initToolbar() {
@@ -121,6 +119,13 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
         toolbar.getMenu().findItem(R.id.search).setVisible(true); //возвращаем значок поиска
         toolbar.setNavigationIcon(null); //убираем кнопку назад
         toolbar.setNavigationOnClickListener(null);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        initToolbar();
+        presenter.loadSearchNews();
     }
 
     @Override
