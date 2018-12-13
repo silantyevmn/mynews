@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -30,10 +31,11 @@ import silantyevmn.ru.mynews.ui.common.BackButtonListener;
 import silantyevmn.ru.mynews.ui.popup.PopupDialogMessage;
 import silantyevmn.ru.mynews.ui.view.BookmarksView;
 
-public class BookmarksFragment extends MvpAppCompatFragment implements BookmarksView, BackButtonListener {
+public class BookmarksFragment extends MvpAppCompatFragment implements BookmarksView, BackButtonListener,SwipeRefreshLayout.OnRefreshListener {
     private RecyclerAdapter adapter;
     private RecyclerView recyclerView;
     private TextView bookmarksTextView;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private Parcelable recyclerViewState; //храним состояние списка
 
@@ -73,6 +75,8 @@ public class BookmarksFragment extends MvpAppCompatFragment implements Bookmarks
         View view = inflater.inflate(R.layout.fragment_bookmarks, container, false);
         recyclerView = view.findViewById(R.id.bookmarks_recycler);
         bookmarksTextView = view.findViewById(R.id.bookmarks_text_view);
+        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         return view;
     }
 
@@ -89,6 +93,7 @@ public class BookmarksFragment extends MvpAppCompatFragment implements Bookmarks
     @Override
     public void updateList() {
         adapter.notifyDataSetChanged();
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -109,6 +114,12 @@ public class BookmarksFragment extends MvpAppCompatFragment implements Bookmarks
     @Override
     public void showError(String text) {
         popupWindow.error(getView(), text);
+        mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void onRefresh() {
+        presenter.loadBookmarks();
     }
 
     @Override

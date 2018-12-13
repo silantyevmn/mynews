@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -29,9 +30,10 @@ import silantyevmn.ru.mynews.ui.common.BackButtonListener;
 import silantyevmn.ru.mynews.ui.popup.PopupDialogMessage;
 import silantyevmn.ru.mynews.ui.view.CategoryView;
 
-public class CategoryFragment extends MvpAppCompatFragment implements CategoryView, BackButtonListener {
+public class CategoryFragment extends MvpAppCompatFragment implements CategoryView, SwipeRefreshLayout.OnRefreshListener, BackButtonListener {
     private RecyclerAdapter adapter;
     private RecyclerView recyclerView;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private Parcelable recyclerViewState; //храним состояние списка
 
@@ -70,6 +72,8 @@ public class CategoryFragment extends MvpAppCompatFragment implements CategoryVi
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_category, container, false);
         recyclerView = view.findViewById(R.id.category_recycler);
+        mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
         return view;
     }
 
@@ -86,16 +90,23 @@ public class CategoryFragment extends MvpAppCompatFragment implements CategoryVi
     @Override
     public void updateList() {
         adapter.notifyDataSetChanged();
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void showError(String text) {
         popupWindow.error(getView(), text);
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
     public void showSuccess(String message) {
         popupWindow.onSuccess(getView(), message);
+    }
+
+    @Override
+    public void onRefresh() {
+        presenter.loadNews();
     }
 
     @Override
