@@ -22,13 +22,11 @@ import silantyevmn.ru.mynews.App;
 import silantyevmn.ru.mynews.R;
 import silantyevmn.ru.mynews.model.image.ImageLoader;
 import silantyevmn.ru.mynews.model.repo.Repo;
-import silantyevmn.ru.mynews.presenter.BookmarksPresenter;
 import silantyevmn.ru.mynews.presenter.CategoryPresenter;
 import silantyevmn.ru.mynews.ui.activity.StartActivity;
 import silantyevmn.ru.mynews.ui.adapter.RecyclerAdapter;
 import silantyevmn.ru.mynews.ui.common.BackButtonListener;
 import silantyevmn.ru.mynews.ui.popup.PopupDialogMessage;
-import silantyevmn.ru.mynews.ui.view.BookmarksView;
 import silantyevmn.ru.mynews.ui.view.CategoryView;
 
 public class CategoryFragment extends MvpAppCompatFragment implements CategoryView, BackButtonListener {
@@ -93,6 +91,11 @@ public class CategoryFragment extends MvpAppCompatFragment implements CategoryVi
     @Override
     public void showError(String text) {
         popupWindow.error(getView(), text);
+    }
+
+    @Override
+    public void showSuccess(String message) {
+        popupWindow.onSuccess(getView(), message);
     }
 
     @Override
