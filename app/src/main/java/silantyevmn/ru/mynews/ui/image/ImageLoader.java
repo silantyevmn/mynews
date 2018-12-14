@@ -1,7 +1,6 @@
-package silantyevmn.ru.mynews.model.image;
+package silantyevmn.ru.mynews.ui.image;
 
 import android.support.annotation.Nullable;
-import android.widget.ImageView;
 
 
 public interface ImageLoader<T> {

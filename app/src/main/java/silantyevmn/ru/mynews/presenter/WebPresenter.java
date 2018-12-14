@@ -6,7 +6,7 @@ import com.arellomobile.mvp.MvpPresenter;
 import io.reactivex.Scheduler;
 import silantyevmn.ru.mynews.model.entity.Articles;
 import silantyevmn.ru.mynews.model.repo.Repo;
-import silantyevmn.ru.mynews.ui.PopupClass;
+import silantyevmn.ru.mynews.utils.PopupClass;
 import silantyevmn.ru.mynews.ui.adapter.IBookmark;
 import silantyevmn.ru.mynews.ui.view.WebNewsView;
 import silantyevmn.ru.mynews.utils.Messages;
@@ -75,5 +75,17 @@ public class WebPresenter extends MvpPresenter<WebNewsView> {
                 getViewState().showError(message);
             }
         });
+    }
+
+    public void openInBrowser() {
+        if (articles != null) {
+            pop.openInBrowser(articles);
+        }
+    }
+
+
+    public void copy() {
+        pop.copy(articles);
+        getViewState().showSuccess(Messages.getTextLinkCopied());
     }
 }

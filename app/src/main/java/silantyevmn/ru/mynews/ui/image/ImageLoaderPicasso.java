@@ -1,4 +1,4 @@
-package silantyevmn.ru.mynews.model.image;
+package silantyevmn.ru.mynews.ui.image;
 
 import android.net.Uri;
 import android.support.annotation.Nullable;

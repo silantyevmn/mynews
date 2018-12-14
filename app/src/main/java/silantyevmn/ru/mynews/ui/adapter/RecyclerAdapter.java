@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 import silantyevmn.ru.mynews.R;
 import silantyevmn.ru.mynews.model.entity.Articles;
-import silantyevmn.ru.mynews.model.image.ImageLoader;
-import silantyevmn.ru.mynews.ui.PopupClass;
+import silantyevmn.ru.mynews.ui.image.ImageLoader;
+import silantyevmn.ru.mynews.utils.PopupClass;
 import silantyevmn.ru.mynews.utils.DateManager;
 import silantyevmn.ru.mynews.utils.Messages;
 
@@ -126,6 +126,16 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         });
                         return true;
                     }
+                    case R.id.web_menu_copy:{
+                        pop.copy(articles);
+                        presenter.showSuccess(Messages.getTextLinkCopied());
+                        return true;
+                    }
+                    case R.id.web_menu_open_browser:{
+                        pop.openInBrowser(articles);
+                        return true;
+                    }
+
                     default:
                         return false;
                 }

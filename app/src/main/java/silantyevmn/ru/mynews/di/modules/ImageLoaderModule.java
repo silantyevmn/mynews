@@ -5,10 +5,8 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import silantyevmn.ru.mynews.model.cache.Cache;
-import silantyevmn.ru.mynews.model.cache.PaperCache;
-import silantyevmn.ru.mynews.model.image.ImageLoader;
-import silantyevmn.ru.mynews.model.image.ImageLoaderPicasso;
+import silantyevmn.ru.mynews.ui.image.ImageLoader;
+import silantyevmn.ru.mynews.ui.image.ImageLoaderPicasso;
 
 @Module
 public class ImageLoaderModule {

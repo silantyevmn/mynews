@@ -49,4 +49,8 @@ public class Messages {
     public static String getNoNewsFound() {
         return App.getInstance().getResources().getString(R.string.no_news_found);
     }
+
+    public static String getTextLinkCopied() {
+        return App.getInstance().getResources().getString(R.string.link_copied);
+    }
 }

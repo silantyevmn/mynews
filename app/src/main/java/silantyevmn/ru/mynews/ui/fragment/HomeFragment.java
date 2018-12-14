@@ -10,7 +10,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -22,7 +21,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import ru.terrakok.cicerone.Router;
 import silantyevmn.ru.mynews.App;
 import silantyevmn.ru.mynews.R;
-import silantyevmn.ru.mynews.model.image.ImageLoader;
+import silantyevmn.ru.mynews.ui.image.ImageLoader;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.presenter.HomePresenter;
 import silantyevmn.ru.mynews.ui.activity.StartActivity;
