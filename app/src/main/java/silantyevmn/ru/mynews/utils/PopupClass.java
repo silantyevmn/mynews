@@ -1,6 +1,10 @@
-package silantyevmn.ru.mynews.ui;
+package silantyevmn.ru.mynews.utils;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import javax.inject.Inject;
 
@@ -11,10 +15,10 @@ import silantyevmn.ru.mynews.R;
 import silantyevmn.ru.mynews.model.entity.Articles;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.ui.adapter.IBookmark;
-import silantyevmn.ru.mynews.utils.Messages;
-import silantyevmn.ru.mynews.utils.NetworkStatus;
 
 public class PopupClass {
+    private static final String SHARE_TYPE = "text/html";
+
     @Inject
     Repo repo;
 
@@ -33,16 +37,14 @@ public class PopupClass {
     }
 
     public void share(Articles articles) {
-        if (NetworkStatus.checkInternetConnection()) {
-            Intent intentShare = new Intent(Intent.ACTION_SEND);
-            intentShare.setType("text/html");
-            intentShare.putExtra(Intent.EXTRA_TEXT, articles.getUrl());
+        Intent intentShare = new Intent(Intent.ACTION_SEND);
+        intentShare.setType(SHARE_TYPE);
+        intentShare.putExtra(Intent.EXTRA_TEXT, articles.getUrl());
 
-            Intent shareIntent = Intent.createChooser(intentShare, App.getInstance().getString(R.string.title_share));
-            shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        Intent shareIntent = Intent.createChooser(intentShare, App.getInstance().getString(R.string.title_share));
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
-            App.getInstance().startActivity(shareIntent);
-        }
+        App.getInstance().startActivity(shareIntent);
     }
 
     public void updateBookmark(Articles articles, IBookmark bookmarkUpdate) {
@@ -53,4 +55,15 @@ public class PopupClass {
                         , throwable -> bookmarkUpdate.onError(Messages.getErrorUpdateBookmark()));
     }
 
+    public void openInBrowser(Articles articles) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(articles.getUrl()));
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        App.getInstance().startActivity(intent);
+    }
+
+    public void copy(Articles articles) {
+        ClipboardManager clipManager = (ClipboardManager) App.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = ClipData.newPlainText(SHARE_TYPE, articles.getUrl());
+        clipManager.setPrimaryClip(clipData);
+    }
 }
