@@ -20,4 +20,6 @@ public interface CategoryView extends MvpView {
     void showHeadpiece();
 
     void hideHeadpiece();
+
+    void showLoading();
 }

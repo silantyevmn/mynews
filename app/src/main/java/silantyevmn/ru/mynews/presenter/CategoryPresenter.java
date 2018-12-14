@@ -50,6 +50,7 @@ public class CategoryPresenter extends MvpPresenter<CategoryView> implements IAd
             return;
         }
         String category= Messages.getTitleCategory(position);
+        getViewState().showLoading();
         repo.getCategoryNews(category)
                 .subscribeOn(Schedulers.io())
                 .observeOn(scheduler)

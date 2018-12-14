@@ -131,6 +131,11 @@ public class CategoryFragment extends MvpAppCompatFragment implements CategoryVi
     }
 
     @Override
+    public void showLoading() {
+        mSwipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
     public void showSuccess(String message) {
         popupWindow.onSuccess(getView(), message);
     }

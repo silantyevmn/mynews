@@ -3,6 +3,7 @@ package silantyevmn.ru.mynews.model.repo;
 import java.util.List;
 
 import io.reactivex.Observable;
+import silantyevmn.ru.mynews.BuildConfig;
 import silantyevmn.ru.mynews.model.api.ApiService;
 import silantyevmn.ru.mynews.model.cache.Cache;
 import silantyevmn.ru.mynews.model.entity.Articles;
@@ -10,7 +11,7 @@ import silantyevmn.ru.mynews.model.entity.News;
 import silantyevmn.ru.mynews.utils.LocaleManager;
 
 public class RepoNews implements Repo {
-    private final String KEY_API = "e355d575a04c43fb9076a3ee6be5253d";
+    private final String KEY_API = BuildConfig.ApiKey;
     private final String localeToCountry;
     private final int PAGE_SIZE = 100;
     private ApiService api;

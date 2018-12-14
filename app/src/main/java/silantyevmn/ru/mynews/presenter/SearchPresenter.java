@@ -11,6 +11,7 @@ import java.util.List;
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
 import ru.terrakok.cicerone.Router;
+import silantyevmn.ru.mynews.R;
 import silantyevmn.ru.mynews.model.entity.Articles;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.ui.Screens;
@@ -51,11 +52,13 @@ public class SearchPresenter extends MvpPresenter<SearchNewsView> implements IAd
             getViewState().showError(Messages.getErrorNoInternetConnection());
             return;
         }
+        getViewState().showLoading();
         repo.getSearchNews(query)
                 .subscribeOn(Schedulers.io())
                 .observeOn(scheduler)
                 .subscribe(news -> {
                     this.articlesList = news.getArticles();
+                    if(news.getArticles().size()==0) getViewState().showInfo(Messages.getNoNewsFound());
                     getViewState().updateList();
                 }, throwable -> {
                     getViewState().showError(Messages.getErrorLoadNetwork());

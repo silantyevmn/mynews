@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -34,6 +35,7 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
     private RecyclerAdapter adapter;
     private RecyclerView recyclerView;
     private Toolbar toolbar;
+    private ProgressBar progressBar;
 
     @Inject
     PopupDialogMessage popupWindow;
@@ -75,6 +77,7 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
         View view = inflater.inflate(R.layout.fragment_search, container, false);
         recyclerView = view.findViewById(R.id.recycler_search);
         toolbar = ((StartActivity) getActivity()).getToolbar();
+        progressBar = view.findViewById(R.id.progress_bar);
         return view;
     }
 
@@ -90,11 +93,14 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
     @Override
     public void updateList() {
         adapter.notifyDataSetChanged();
+        progressBar.setVisibility(View.GONE);
     }
+
 
     @Override
     public void showError(String text) {
         popupWindow.error(getView(), text);
+        progressBar.setVisibility(View.GONE);
     }
 
     @Override
@@ -105,6 +111,11 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
     @Override
     public void showSuccess(String message) {
         popupWindow.onSuccess(getView(), message);
+    }
+
+    @Override
+    public void showLoading() {
+        progressBar.setVisibility(View.VISIBLE);
     }
 
     private void initToolbar() {

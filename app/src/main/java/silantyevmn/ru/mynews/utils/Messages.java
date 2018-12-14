@@ -3,10 +3,6 @@ package silantyevmn.ru.mynews.utils;
 import silantyevmn.ru.mynews.App;
 import silantyevmn.ru.mynews.R;
 
-/**
- * Created by silan on 04.12.2018.
- */
-
 public class Messages {
 
     public static String getErrorNoInternetConnection() {
@@ -48,5 +44,9 @@ public class Messages {
 
     public static String getTitleCategory(int position) {
         return App.getInstance().getResources().getStringArray(R.array.category_list)[position];
+    }
+
+    public static String getNoNewsFound() {
+        return App.getInstance().getResources().getString(R.string.no_news_found);
     }
 }
