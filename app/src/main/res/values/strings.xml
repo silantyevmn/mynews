@@ -19,4 +19,22 @@
     <string name="bookmark_success_remove">Закладка успешно удалена.</string>
     <string name="error_find_status_bookmark">Ошибка при поиске статуса закладки.</string>
 
+    <string-array name="category_list">
+        <item>general</item>
+        <item>business</item>
+        <item>technology</item>
+        <item>sports</item>
+        <item>entertainment</item>
+        <item>health</item>
+        <item>science</item>
+    </string-array>
+    <string-array name="category_list_title">
+        <item>Top</item>
+        <item>Business</item>
+        <item>Technology</item>
+        <item>Sports</item>
+        <item>Entertainment</item>
+        <item>Health</item>
+        <item>Science</item>
+    </string-array>
 </resources>
