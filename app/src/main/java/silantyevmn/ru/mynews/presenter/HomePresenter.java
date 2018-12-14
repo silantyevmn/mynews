@@ -7,6 +7,7 @@ import com.arellomobile.mvp.MvpPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
@@ -49,6 +50,7 @@ public class HomePresenter extends MvpPresenter<HomeView> implements IAdapter {
             getViewState().showError(Messages.getErrorNoInternetConnection());
             return;
         }
+        getViewState().showLoading();
         repo.getTopNews()
                 .subscribeOn(Schedulers.io())
                 .observeOn(scheduler)

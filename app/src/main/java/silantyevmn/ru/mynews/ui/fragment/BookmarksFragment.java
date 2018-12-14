@@ -112,6 +112,11 @@ public class BookmarksFragment extends MvpAppCompatFragment implements Bookmarks
     }
 
     @Override
+    public void showLoading() {
+        mSwipeRefreshLayout.setRefreshing(true);
+    }
+
+    @Override
     public void showError(String text) {
         popupWindow.error(getView(), text);
         mSwipeRefreshLayout.setRefreshing(false);

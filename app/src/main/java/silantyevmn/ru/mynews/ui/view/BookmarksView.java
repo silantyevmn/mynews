@@ -20,4 +20,6 @@ public interface BookmarksView extends MvpView {
 
     @StateStrategyType(SkipStrategy.class)
     void showSuccess(String message);
+
+    void showLoading();
 }

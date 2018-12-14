@@ -16,4 +16,6 @@ public interface HomeView extends MvpView {
 
     @StateStrategyType(SkipStrategy.class)
     void showSuccess(String text);
+
+    void showLoading();
 }

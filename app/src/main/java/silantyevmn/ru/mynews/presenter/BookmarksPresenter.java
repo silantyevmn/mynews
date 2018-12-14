@@ -47,6 +47,7 @@ public class BookmarksPresenter extends MvpPresenter<BookmarksView> implements I
     public void loadBookmarks() {
         //загрузка списка закладок
         //если лист пустой то показываем заставку, иначе список
+        getViewState().showLoading();
         repo.getBookmarksList()
                 .subscribeOn(Schedulers.io())
                 .observeOn(scheduler)

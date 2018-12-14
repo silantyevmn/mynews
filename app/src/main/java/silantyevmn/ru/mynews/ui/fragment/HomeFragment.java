@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import com.arellomobile.mvp.MvpAppCompatFragment;
 import com.arellomobile.mvp.presenter.InjectPresenter;
@@ -102,6 +103,11 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
     @Override
     public void showSuccess(String text) {
         popupWindow.onSuccess(getView(), text);
+    }
+
+    @Override
+    public void showLoading() {
+        mSwipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
