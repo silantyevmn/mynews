@@ -46,4 +46,9 @@ public class RepoNews implements Repo {
     public Observable<Boolean> findBookmark(Articles articles) {
         return cache.findBookmark(articles);
     }
+
+    @Override
+    public Observable<News> getCategoryNews(String category) {
+        return api.getCategoryNews(KEY_API, PAGE_SIZE, localeToCountry, category);
+    }
 }
