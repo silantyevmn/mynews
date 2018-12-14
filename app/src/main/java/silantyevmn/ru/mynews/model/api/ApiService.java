@@ -20,4 +20,12 @@ public interface ApiService {
             @Query("apiKey") String keyApi,
             @Query("q") String text
     );
+
+    @GET("v2/top-headlines/")
+    Observable<News> getCategoryNews(
+            @Query("apiKey") String keyApi,
+            @Query("pageSize") int pageSize,
+            @Query("country") String country,
+            @Query("category") String category
+    );
 }

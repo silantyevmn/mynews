@@ -16,4 +16,6 @@ public interface Repo {
     Observable<Boolean> updateBookmark(Articles articles);
 
     Observable<Boolean> findBookmark(Articles articles);
+
+    Observable<News> getCategoryNews(String category);
 }

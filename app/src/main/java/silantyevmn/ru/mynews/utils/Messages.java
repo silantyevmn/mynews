@@ -44,4 +44,9 @@ public class Messages {
     public static String getErrorStatusBookmark() {
         return App.getInstance().getString(R.string.error_find_status_bookmark);
     }
+
+
+    public static String getTitleCategory(int position) {
+        return App.getInstance().getResources().getStringArray(R.array.category_list)[position];
+    }
 }
