@@ -1,5 +1,6 @@
 package silantyevmn.ru.mynews.ui.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
@@ -9,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
@@ -67,6 +69,14 @@ public class StartActivity extends MvpAppCompatActivity implements StartView {
         App.getInstance().getComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
+
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            getWindow().setNavigationBarColor(getColor(R.color.colorWhite));
+        } else {
+            getWindow().setNavigationBarColor(getColor(R.color.colorLightGrey));
+        }
+
         toolbar = findViewById(R.id.toolbar);
         titleToolbar = findViewById(R.id.toolbar_title);
         onCreateOptionsMenu(toolbar.getMenu());
