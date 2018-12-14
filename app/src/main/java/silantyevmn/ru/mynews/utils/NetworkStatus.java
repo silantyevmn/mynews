@@ -15,13 +15,4 @@ public class NetworkStatus {
                 && connectivityManager.getActiveNetworkInfo().isAvailable()
                 && connectivityManager.getActiveNetworkInfo().isConnected();
     }
-
-    public static boolean checkInternetConnection() {
-        boolean check = isInternetAvailable();
-        if (!check) {
-            Toast.makeText(App.getInstance(), App.getInstance().getString(R.string.no_internet_connection) +
-                    "\n" + App.getInstance().getString(R.string.check_connection_settings), Toast.LENGTH_LONG).show();
-        }
-        return check;
-    }
 }
