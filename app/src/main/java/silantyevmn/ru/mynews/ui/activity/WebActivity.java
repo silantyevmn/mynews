@@ -3,6 +3,7 @@ package silantyevmn.ru.mynews.ui.activity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
@@ -46,7 +47,7 @@ public class WebActivity extends MvpAppCompatActivity implements WebNewsView {
         App.getInstance().getComponent().inject(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web);
-
+        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         webToolbar = findViewById(R.id.toolbar);
         //init WebView
         webViewNews = findViewById(R.id.news_web_view);
@@ -77,6 +78,14 @@ public class WebActivity extends MvpAppCompatActivity implements WebNewsView {
             }
             case R.id.web_menu_bookmark: {
                 presenter.updateBookmark();
+                return true;
+            }
+            case R.id.web_menu_open_browser: {
+                presenter.openInBrowser();
+                return true;
+            }
+            case R.id.web_menu_copy :{
+                presenter.copy();
                 return true;
             }
             default:
