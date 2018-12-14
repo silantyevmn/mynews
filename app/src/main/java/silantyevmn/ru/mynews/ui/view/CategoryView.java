@@ -16,4 +16,8 @@ public interface CategoryView extends MvpView {
 
 	@StateStrategyType(SkipStrategy.class)
     void showSuccess(String message);
+
+    void showHeadpiece();
+
+    void hideHeadpiece();
 }

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Scheduler;
+import io.reactivex.schedulers.Schedulers;
 import ru.terrakok.cicerone.Router;
 import silantyevmn.ru.mynews.model.entity.Articles;
 import silantyevmn.ru.mynews.model.repo.Repo;
@@ -43,23 +44,26 @@ public class CategoryPresenter extends MvpPresenter<CategoryView> implements IAd
         getViewState().init();
     }
 
-    public void loadNews() {
+    public void loadNews(int position) {
         if (!NetworkStatus.isInternetAvailable()) {
             getViewState().showError(Messages.getErrorNoInternetConnection());
             return;
         }
-        //загрузка списка закладок
-        //если лист пустой то показываем текст, иначе список
-
-        /*repo.getTopNews()
+        String category= Messages.getTitleCategory(position);
+        repo.getCategoryNews(category)
                 .subscribeOn(Schedulers.io())
                 .observeOn(scheduler)
                 .subscribe(news -> {
                     this.articlesList = news.getArticles();
+                    if (news.getArticles().size() == 0) {
+                        getViewState().showHeadpiece();//покажем заставку
+                    } else {
+                        getViewState().hideHeadpiece();//скроем заставку
+                    }
                     getViewState().updateList();
                 }, throwable -> {
                     getViewState().showError(Messages.getErrorLoadNetwork());
-                });*/
+                });
     }
 
     @Override
@@ -83,5 +87,9 @@ public class CategoryPresenter extends MvpPresenter<CategoryView> implements IAd
 
     public void onBackPressed() {
         router.exit();
+    }
+
+    public void onTabSelected(int position) {
+        loadNews(position);
     }
 }
