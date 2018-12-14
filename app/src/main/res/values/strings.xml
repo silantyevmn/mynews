@@ -19,6 +19,7 @@
     <string name="bookmark_success_remove">Закладка успешно удалена.</string>
     <string name="error_find_status_bookmark">Ошибка при поиске статуса закладки.</string>
     <string name="no_news_found">Новостей не найдено.</string>
+    <string name="link_copied">Link copied</string>
 
     <string-array name="category_list">
         <item>general</item>
