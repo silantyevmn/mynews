@@ -22,7 +22,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import ru.terrakok.cicerone.Router;
 import silantyevmn.ru.mynews.App;
 import silantyevmn.ru.mynews.R;
-import silantyevmn.ru.mynews.model.image.ImageLoader;
+import silantyevmn.ru.mynews.ui.image.ImageLoader;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.presenter.BookmarksPresenter;
 import silantyevmn.ru.mynews.ui.activity.StartActivity;

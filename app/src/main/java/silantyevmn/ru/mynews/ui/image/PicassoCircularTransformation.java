@@ -1,4 +1,4 @@
-package silantyevmn.ru.mynews.model.image;
+package silantyevmn.ru.mynews.ui.image;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
