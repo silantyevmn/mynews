@@ -71,11 +71,6 @@ public class StartActivity extends MvpAppCompatActivity implements StartView {
         setContentView(R.layout.activity_start);
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            getWindow().setNavigationBarColor(getColor(R.color.colorWhite));
-        } else {
-            getWindow().setNavigationBarColor(getColor(R.color.colorLightGrey));
-        }
 
         toolbar = findViewById(R.id.toolbar);
         titleToolbar = findViewById(R.id.toolbar_title);

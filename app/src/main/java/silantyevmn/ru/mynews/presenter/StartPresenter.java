@@ -39,11 +39,11 @@ public class StartPresenter extends MvpPresenter<StartView> {
     }
 
     public void categoryScreen(String titleToolbar) {
-        navigationToScreen(titleToolbar, new Screens.CategoryScreen());
+        replaceScreen(titleToolbar, new Screens.CategoryScreen());
     }
 
     public void bookmarksScreen(String titleToolbar) {
-        navigationToScreen(titleToolbar, new Screens.BookmarksScreen());
+        replaceScreen(titleToolbar, new Screens.BookmarksScreen());
     }
 
     private void replaceScreen(String titleToolbar, SupportAppScreen supportAppScreen) {

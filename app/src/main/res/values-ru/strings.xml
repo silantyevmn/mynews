@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="no_internet_connection">Отсутствует интернет соединение</string>
+    <string name="check_connection_settings">Проверьте настройки сети</string>
+    <string name="title_home">Новости</string>
+    <string name="title_search">Поиск</string>
+    <string name="title_bookmarks">Закладки</string>
+    <string name="title_category">Категории</string>
+    <string name="error_load_network">Ошибка при загрузке из сети</string>
+    <string name="title_share">Поделиться</string>
+    <string name="title_copy">Скопировать</string>
+    <string name="title_openInBrowser">Открыть в браузере</string>
+    <string name="error_load_cache">Ошибка при загрузке из кеша</string>
+    <string name="bookmark_remove">Удалить закладку</string>
+    <string name="bookmark_add">Добавить закладку</string>
+    <string name="error_update_bookmark">Ошибка при обновлении закладки</string>
+    <string name="bookmark_success_add">Закладка успешно добавлена.</string>
+    <string name="bookmark_success_remove">Закладка успешно удалена.</string>
+    <string name="error_find_status_bookmark">Ошибка при поиске статуса закладки.</string>
+    <string name="no_news_found">Новостей не найдено.</string>
+    <string name="link_copied">Скопировано в буфер.</string>
+
+    <string-array name="category_list_title">
+        <item>Топ</item>
+        <item>Бизнес</item>
+        <item>Технология</item>
+        <item>Спорт</item>
+        <item>Развлечения</item>
+        <item>Здоровье</item>
+        <item>Наука</item>
+    </string-array>
+</resources>

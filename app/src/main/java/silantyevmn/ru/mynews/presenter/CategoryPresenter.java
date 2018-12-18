@@ -18,6 +18,7 @@ import silantyevmn.ru.mynews.ui.adapter.IAdapter;
 import silantyevmn.ru.mynews.ui.view.CategoryView;
 import silantyevmn.ru.mynews.utils.Messages;
 import silantyevmn.ru.mynews.utils.NetworkStatus;
+import silantyevmn.ru.mynews.utils.SharedManager;
 
 @InjectViewState
 public class CategoryPresenter extends MvpPresenter<CategoryView> implements IAdapter {
@@ -44,12 +45,12 @@ public class CategoryPresenter extends MvpPresenter<CategoryView> implements IAd
         getViewState().init();
     }
 
-    public void loadNews(int position) {
+    public void loadNews() {
         if (!NetworkStatus.isInternetAvailable()) {
             getViewState().showError(Messages.getErrorNoInternetConnection());
             return;
         }
-        String category= Messages.getTitleCategory(position);
+        String category = Messages.getTitleCategory(getSelectedTabPosition());
         getViewState().showLoading();
         repo.getCategoryNews(category)
                 .subscribeOn(Schedulers.io())
@@ -91,6 +92,15 @@ public class CategoryPresenter extends MvpPresenter<CategoryView> implements IAd
     }
 
     public void onTabSelected(int position) {
-        loadNews(position);
+        saveSelectedTabPosition(position);
+        loadNews();
+    }
+
+    public void saveSelectedTabPosition(int selectedTabPosition) {
+        SharedManager.setCategoryPosition(selectedTabPosition);
+    }
+
+    public int getSelectedTabPosition() {
+        return SharedManager.getCategoryPosition();
     }
 }
