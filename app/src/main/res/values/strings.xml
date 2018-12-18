@@ -1,24 +1,24 @@
 <resources>
-    <string name="app_name">MyNews</string>
-    <string name="no_internet_connection">Отсутствует интернет соединение</string>
-    <string name="check_connection_settings">Проверьте настройки сети</string>
-    <string name="title_home">Home</string>
-    <string name="title_search">Search</string>
-    <string name="title_bookmarks">Bookmarks</string>
-    <string name="title_category">Category</string>
-    <string name="error_load_network">Ошибка при загрузке из сети</string>
-    <string name="bottom_navigation_view_behavior">"silantyevmn.ru.mynews.ui.BottonNavigationViewHideOnScrollBehavior"</string>
-    <string name="title_share">Поделиться</string>
-    <string name="title_copy">Скопировать</string>
-    <string name="title_openInBrowser">Открыть в браузере</string>
-    <string name="error_load_cache">Ошибка при загрузке из кеша</string>
-    <string name="bookmark_remove">Удалить закладку</string>
-    <string name="bookmark_add">Добавить закладку</string>
-    <string name="error_update_bookmark">Ошибка при обновлении закладки</string>
-    <string name="bookmark_success_add">Закладка успешно добавлена.</string>
-    <string name="bookmark_success_remove">Закладка успешно удалена.</string>
-    <string name="error_find_status_bookmark">Ошибка при поиске статуса закладки.</string>
-    <string name="no_news_found">Новостей не найдено.</string>
+    <string name="app_name" translatable="false">MyNews</string>
+    <string name="no_internet_connection" translatable="false">No internet connection</string>
+    <string name="check_connection_settings" translatable="false">Check connection settings</string>
+    <string name="title_home" translatable="false">News</string>
+    <string name="title_search" translatable="false">Search</string>
+    <string name="title_bookmarks" translatable="false">Bookmarks</string>
+    <string name="title_category" translatable="false">Category</string>
+    <string name="error_load_network" translatable="false">Error when booting from the network</string>
+    <string name="bottom_navigation_view_behavior" translatable="false">"silantyevmn.ru.mynews.ui.BottonNavigationViewHideOnScrollBehavior"</string>
+    <string name="title_share" translatable="false">Share</string>
+    <string name="title_copy" translatable="false">Copy</string>
+    <string name="title_openInBrowser" translatable="false">Open in browser</string>
+    <string name="error_load_cache" translatable="false">Error loading from cache</string>
+    <string name="bookmark_remove">Remove bookmark</string>
+    <string name="bookmark_add">Add bookmark</string>
+    <string name="error_update_bookmark">Error updating bookmark</string>
+    <string name="bookmark_success_add">Bookmark successfully added.</string>
+    <string name="bookmark_success_remove">The bookmark was successfully deleted.</string>
+    <string name="error_find_status_bookmark">Bug in the search status tab.</string>
+    <string name="no_news_found">No news found.</string>
     <string name="link_copied">Link copied</string>
 
     <string-array name="category_list">
