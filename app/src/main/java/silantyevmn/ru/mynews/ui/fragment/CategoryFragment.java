@@ -38,7 +38,6 @@ public class CategoryFragment extends MvpAppCompatFragment implements CategoryVi
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private TabLayout tabLayout;
     private TextView categoryHeadpiece;
-    private int currentTabPosition = 0;
 
     private Parcelable recyclerViewState; //храним состояние списка
 
@@ -152,13 +151,13 @@ public class CategoryFragment extends MvpAppCompatFragment implements CategoryVi
 
     @Override
     public void onRefresh() {
-        presenter.loadNews(tabLayout.getSelectedTabPosition());
+        presenter.loadNews();
     }
 
     @Override
     public void onPause() {
         recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();//save
-        currentTabPosition = tabLayout.getSelectedTabPosition();
+        presenter.saveSelectedTabPosition(tabLayout.getSelectedTabPosition());
         super.onPause();
     }
 
@@ -166,8 +165,8 @@ public class CategoryFragment extends MvpAppCompatFragment implements CategoryVi
     public void onResume() {
         super.onResume();
         ((StartActivity) getActivity()).initToolbar(getString(R.string.title_category));
-        presenter.loadNews(currentTabPosition);
-        tabLayout.setScrollPosition(currentTabPosition, 0f, true);
+        presenter.loadNews();
+        tabLayout.getTabAt(presenter.getSelectedTabPosition()).select();
         if (recyclerViewState != null) {
             recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);//restore
         }
