@@ -33,10 +33,7 @@ public class ImageLoaderPicasso implements ImageLoader<ImageView> {
     private void show(String url, ImageView container) {
         Picasso.get()
                 .load(url)
-                .placeholder(R.drawable.ic_autorenew_black_24dp)
-                .error(R.drawable.ic_crop_original_black_24dp)
-                .centerCrop(0)
-                .resize(88, 88)
+                .placeholder(R.drawable.placeholder)
                 .into(container);
     }
 
