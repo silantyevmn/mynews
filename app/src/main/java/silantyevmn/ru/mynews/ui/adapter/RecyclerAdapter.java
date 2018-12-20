@@ -1,6 +1,8 @@
 package silantyevmn.ru.mynews.ui.adapter;
 
+import android.annotation.SuppressLint;
 import android.support.annotation.NonNull;
+import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,9 +15,9 @@ import android.widget.TextView;
 import silantyevmn.ru.mynews.R;
 import silantyevmn.ru.mynews.model.entity.Articles;
 import silantyevmn.ru.mynews.ui.image.ImageLoader;
-import silantyevmn.ru.mynews.utils.PopupClass;
 import silantyevmn.ru.mynews.utils.DateManager;
 import silantyevmn.ru.mynews.utils.Messages;
+import silantyevmn.ru.mynews.utils.PopupClass;
 
 public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyViewHolder> {
     private IAdapter presenter;
@@ -82,9 +84,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
         }
 
+        @SuppressLint("RestrictedApi")
         private void showCustomMenu(View view, Articles articles) {
             PopupMenu popupMenu = new PopupMenu(itemView.getContext(), view);
             popupMenu.inflate(R.menu.menu_web);
+
             MenuItem menuBookmark = popupMenu.getMenu().findItem(R.id.web_menu_bookmark);
             pop.getStatusBookmark(articles, new IBookmark() {
                 @Override
@@ -114,7 +118,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         pop.updateBookmark(articles, new IBookmark() {
                             @Override
                             public void onSuccess(boolean isBookmark) {
-                                if (isBookmark) presenter.showSuccess(Messages.getBookmarkSuccessAdd());
+                                if (isBookmark)
+                                    presenter.showSuccess(Messages.getBookmarkSuccessAdd());
                                 else presenter.showSuccess(Messages.getBookmarkSuccessRemove());
                                 presenter.updateStatusBookmarks();
                             }
@@ -126,12 +131,12 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         });
                         return true;
                     }
-                    case R.id.web_menu_copy:{
+                    case R.id.web_menu_copy: {
                         pop.copy(articles);
                         presenter.showSuccess(Messages.getTextLinkCopied());
                         return true;
                     }
-                    case R.id.web_menu_open_browser:{
+                    case R.id.web_menu_open_browser: {
                         pop.openInBrowser(articles);
                         return true;
                     }
@@ -140,6 +145,15 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         return false;
                 }
             });
+
+            if (popupMenu.getMenu() instanceof MenuBuilder) {
+                MenuBuilder menuBuilder = (MenuBuilder) popupMenu.getMenu();
+                menuBuilder.setOptionalIconsVisible(true); //показывпаем значки в меню
+            }
+            /*MenuPopupHelper menuHelper = new MenuPopupHelper(itemView.getContext(), (MenuBuilder) popupMenu.getMenu(),view);
+            menuHelper.setForceShowIcon(true);
+            menuHelper.setGravity(Gravity.START);
+            menuHelper.show();*/
             popupMenu.show();
         }
 
