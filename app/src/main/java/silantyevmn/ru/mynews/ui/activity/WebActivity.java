@@ -1,6 +1,8 @@
 package silantyevmn.ru.mynews.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuBuilder;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -57,16 +59,26 @@ public class WebActivity extends MvpAppCompatActivity implements WebNewsView {
         webViewNews.getSettings().setBuiltInZoomControls(true);
     }
 
+    @SuppressLint("RestrictedApi")
     @Override
     public void init(Articles articles) {
         webToolbar.setTitle(articles.getSource().getName());
         webToolbar.inflateMenu(R.menu.menu_web);
         bookmarkMenuItem = webToolbar.getMenu().findItem(R.id.web_menu_bookmark);
+        if (webToolbar.getMenu() instanceof MenuBuilder) {
+            MenuBuilder menuBuilder = (MenuBuilder) webToolbar.getMenu();
+            menuBuilder.setOptionalIconsVisible(true); //показывпаем значки в меню
+        }
+
         webToolbar.setOnMenuItemClickListener(this::onOptionsItemSelected);
         webToolbar.setNavigationOnClickListener(click -> {
             onBackPressed();
         });
 
+    }
+
+    public MenuItem getBookmarkMenuItem() {
+        return bookmarkMenuItem;
     }
 
     @Override
@@ -84,7 +96,7 @@ public class WebActivity extends MvpAppCompatActivity implements WebNewsView {
                 presenter.openInBrowser();
                 return true;
             }
-            case R.id.web_menu_copy :{
+            case R.id.web_menu_copy: {
                 presenter.copy();
                 return true;
             }
