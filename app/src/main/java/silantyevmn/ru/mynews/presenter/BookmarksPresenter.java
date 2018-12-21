@@ -17,7 +17,6 @@ import silantyevmn.ru.mynews.ui.Screens;
 import silantyevmn.ru.mynews.ui.adapter.IAdapter;
 import silantyevmn.ru.mynews.ui.view.BookmarksView;
 import silantyevmn.ru.mynews.utils.Messages;
-import silantyevmn.ru.mynews.utils.NetworkStatus;
 
 @InjectViewState
 public class BookmarksPresenter extends MvpPresenter<BookmarksView> implements IAdapter {
@@ -41,7 +40,6 @@ public class BookmarksPresenter extends MvpPresenter<BookmarksView> implements I
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        getViewState().init();
     }
 
     public void loadBookmarks() {
