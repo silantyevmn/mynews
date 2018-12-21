@@ -7,6 +7,7 @@ import silantyevmn.ru.mynews.di.modules.ImageLoaderModule;
 import silantyevmn.ru.mynews.di.modules.NavigationModule;
 import silantyevmn.ru.mynews.di.modules.PopupWindowModule;
 import silantyevmn.ru.mynews.di.modules.RepoModule;
+import silantyevmn.ru.mynews.ui.fragment.CategoryPageFragment;
 import silantyevmn.ru.mynews.utils.PopupClass;
 import silantyevmn.ru.mynews.ui.activity.StartActivity;
 import silantyevmn.ru.mynews.ui.activity.WebActivity;
@@ -36,5 +37,7 @@ public interface AppComponent {
     void inject(CategoryFragment categoryFragment);
 
     void inject(PopupClass popupClass);
+
+    void inject(CategoryPageFragment categoryPageFragment);
 
 }
