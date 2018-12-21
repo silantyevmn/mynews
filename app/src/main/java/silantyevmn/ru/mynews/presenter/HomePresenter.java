@@ -7,7 +7,6 @@ import com.arellomobile.mvp.MvpPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Scheduler;
 import io.reactivex.schedulers.Schedulers;
@@ -42,7 +41,6 @@ public class HomePresenter extends MvpPresenter<HomeView> implements IAdapter {
     @Override
     protected void onFirstViewAttach() {
         super.onFirstViewAttach();
-        getViewState().init();
     }
 
     public void loadNews() {
