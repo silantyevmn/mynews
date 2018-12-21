@@ -21,12 +21,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import ru.terrakok.cicerone.Router;
 import silantyevmn.ru.mynews.App;
 import silantyevmn.ru.mynews.R;
-import silantyevmn.ru.mynews.ui.image.ImageLoader;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.presenter.SearchPresenter;
 import silantyevmn.ru.mynews.ui.activity.StartActivity;
 import silantyevmn.ru.mynews.ui.adapter.RecyclerAdapter;
 import silantyevmn.ru.mynews.ui.common.BackButtonListener;
+import silantyevmn.ru.mynews.ui.image.ImageLoader;
 import silantyevmn.ru.mynews.ui.popup.PopupDialogMessage;
 import silantyevmn.ru.mynews.ui.view.SearchNewsView;
 
@@ -78,16 +78,12 @@ public class SearchFragment extends MvpAppCompatFragment implements SearchNewsVi
         recyclerView = view.findViewById(R.id.recycler_search);
         toolbar = ((StartActivity) getActivity()).getToolbar();
         progressBar = view.findViewById(R.id.progress_bar);
-        return view;
-    }
-
-    @Override
-    public void init() {
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
         adapter = new RecyclerAdapter(presenter, imageLoader);
         recyclerView.setAdapter(adapter);
+        return view;
     }
 
     @Override

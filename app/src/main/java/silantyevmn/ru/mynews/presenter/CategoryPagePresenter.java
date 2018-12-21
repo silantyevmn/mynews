@@ -15,29 +15,30 @@ import silantyevmn.ru.mynews.model.entity.Articles;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.ui.Screens;
 import silantyevmn.ru.mynews.ui.adapter.IAdapter;
-import silantyevmn.ru.mynews.ui.view.SearchNewsView;
+import silantyevmn.ru.mynews.ui.view.CategoryPageView;
+import silantyevmn.ru.mynews.ui.view.CategoryView;
 import silantyevmn.ru.mynews.utils.Messages;
 import silantyevmn.ru.mynews.utils.NetworkStatus;
 
 @InjectViewState
-public class SearchPresenter extends MvpPresenter<SearchNewsView> implements IAdapter {
+public class CategoryPagePresenter extends MvpPresenter<CategoryPageView> implements IAdapter {
 
     private Scheduler scheduler;
     private Router router;
     private Repo repo;
     private List<Articles> articlesList = new ArrayList<>();
-    private String query;
+    private int position;
 
     public List<Articles> getArticlesList() {
         return articlesList;
     }
 
     @SuppressLint("CheckResult")
-    public SearchPresenter(Scheduler scheduler, Router router, Repo repo, String query) {
+    public CategoryPagePresenter(Scheduler scheduler, Router router, Repo repo, int position) {
         this.scheduler = scheduler;
         this.router = router;
         this.repo = repo;
-        this.query = query;
+        this.position = position;
     }
 
     @Override
@@ -45,19 +46,23 @@ public class SearchPresenter extends MvpPresenter<SearchNewsView> implements IAd
         super.onFirstViewAttach();
     }
 
-    public void loadSearchNews() {
+    public void loadNews() {
         if (!NetworkStatus.isInternetAvailable()) {
             getViewState().showError(Messages.getErrorNoInternetConnection());
             return;
         }
+        String category = Messages.getTitleCategory(position);
         getViewState().showLoading();
-        repo.getSearchNews(query)
+        repo.getCategoryNews(category)
                 .subscribeOn(Schedulers.io())
                 .observeOn(scheduler)
                 .subscribe(news -> {
                     this.articlesList = news.getArticles();
-                    if (news.getArticles().size() == 0)
-                        getViewState().showInfo(Messages.getNoNewsFound());
+                    if (news.getArticles().size() == 0) {
+                        getViewState().showHeadpiece();//покажем заставку
+                    } else {
+                        getViewState().hideHeadpiece();//скроем заставку
+                    }
                     getViewState().updateList();
                 }, throwable -> {
                     getViewState().showError(Messages.getErrorLoadNetwork());
@@ -71,7 +76,6 @@ public class SearchPresenter extends MvpPresenter<SearchNewsView> implements IAd
 
     @Override
     public void updateStatusBookmarks() {
-
     }
 
     @Override

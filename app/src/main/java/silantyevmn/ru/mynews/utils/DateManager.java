@@ -5,6 +5,7 @@ import org.ocpsoft.prettytime.PrettyTime;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by silan on 01.12.2018.
@@ -12,7 +13,7 @@ import java.util.Date;
 
 public class DateManager {
     public static String getTimePublished(String dateString){
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'");
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'",Locale.getDefault());
         Date tempDate;
         try {
             tempDate = format.parse(dateString);
