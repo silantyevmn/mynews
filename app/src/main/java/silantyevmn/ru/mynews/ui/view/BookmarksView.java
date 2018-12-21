@@ -7,7 +7,6 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 @StateStrategyType(AddToEndStrategy.class)
 public interface BookmarksView extends MvpView {
-    void init();
 
     void updateList();
 

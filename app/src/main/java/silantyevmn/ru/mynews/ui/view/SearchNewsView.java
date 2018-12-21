@@ -7,7 +7,6 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface SearchNewsView extends MvpView {
-    void init();
 
     void updateList();
 

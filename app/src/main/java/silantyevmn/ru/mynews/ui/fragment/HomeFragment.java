@@ -1,7 +1,6 @@
 package silantyevmn.ru.mynews.ui.fragment;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -21,12 +20,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import ru.terrakok.cicerone.Router;
 import silantyevmn.ru.mynews.App;
 import silantyevmn.ru.mynews.R;
-import silantyevmn.ru.mynews.ui.image.ImageLoader;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.presenter.HomePresenter;
 import silantyevmn.ru.mynews.ui.activity.StartActivity;
 import silantyevmn.ru.mynews.ui.adapter.RecyclerAdapter;
 import silantyevmn.ru.mynews.ui.common.BackButtonListener;
+import silantyevmn.ru.mynews.ui.image.ImageLoader;
 import silantyevmn.ru.mynews.ui.popup.PopupDialogMessage;
 import silantyevmn.ru.mynews.ui.view.HomeView;
 
@@ -34,8 +33,6 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
     private RecyclerAdapter adapter;
     private RecyclerView recyclerView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
-    private Parcelable recyclerViewState; //храним состояние списка
 
     @Inject
     PopupDialogMessage popupWindow;
@@ -74,17 +71,13 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
         recyclerView = view.findViewById(R.id.recycler_home);
         mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        return view;
-    }
-
-    @Override
-    public void init() {
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
         adapter = new RecyclerAdapter(presenter, imageLoader);
         recyclerView.setAdapter(adapter);
+        return view;
     }
 
     @Override
@@ -115,19 +108,10 @@ public class HomeFragment extends MvpAppCompatFragment implements HomeView, Back
     }
 
     @Override
-    public void onPause() {
-        recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();//save
-        super.onPause();
-    }
-
-    @Override
     public void onResume() {
         super.onResume();
         ((StartActivity) getActivity()).initToolbar(getString(R.string.title_home));
         presenter.loadNews();
-        if (recyclerViewState != null) {
-            recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);//restore
-        }
     }
 
     @Override

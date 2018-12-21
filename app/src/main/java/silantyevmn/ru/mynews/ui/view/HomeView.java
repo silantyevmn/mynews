@@ -7,7 +7,6 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType;
 
 @StateStrategyType(AddToEndSingleStrategy.class)
 public interface HomeView extends MvpView {
-    void init();
 
     void updateList();
 
