@@ -77,10 +77,6 @@ public class WebActivity extends MvpAppCompatActivity implements WebNewsView {
 
     }
 
-    public MenuItem getBookmarkMenuItem() {
-        return bookmarkMenuItem;
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
