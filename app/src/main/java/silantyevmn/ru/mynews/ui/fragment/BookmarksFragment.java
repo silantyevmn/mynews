@@ -33,11 +33,8 @@ import silantyevmn.ru.mynews.ui.view.BookmarksView;
 
 public class BookmarksFragment extends MvpAppCompatFragment implements BookmarksView, BackButtonListener,SwipeRefreshLayout.OnRefreshListener {
     private RecyclerAdapter adapter;
-    private RecyclerView recyclerView;
     private TextView bookmarksTextView;
     private SwipeRefreshLayout mSwipeRefreshLayout;
-
-    private Parcelable recyclerViewState; //храним состояние списка
 
     @Inject
     PopupDialogMessage popupWindow;
@@ -73,21 +70,17 @@ public class BookmarksFragment extends MvpAppCompatFragment implements Bookmarks
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_bookmarks, container, false);
-        recyclerView = view.findViewById(R.id.bookmarks_recycler);
+        RecyclerView recyclerView = view.findViewById(R.id.bookmarks_recycler);
         bookmarksTextView = view.findViewById(R.id.bookmarks_text_view);
         mSwipeRefreshLayout = view.findViewById(R.id.swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
-        return view;
-    }
-
-    @Override
-    public void init() {
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         manager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(manager);
         recyclerView.setHasFixedSize(true);
         adapter = new RecyclerAdapter(presenter, imageLoader);
         recyclerView.setAdapter(adapter);
+        return view;
     }
 
     @Override
@@ -127,20 +120,12 @@ public class BookmarksFragment extends MvpAppCompatFragment implements Bookmarks
         presenter.loadBookmarks();
     }
 
-    @Override
-    public void onPause() {
-        recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState();//save
-        super.onPause();
-    }
 
     @Override
     public void onResume() {
         super.onResume();
         ((StartActivity) getActivity()).initToolbar(getString(R.string.title_bookmarks));
         presenter.loadBookmarks();
-        if (recyclerViewState != null) {
-            recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState);//restore
-        }
     }
 
     @Override
