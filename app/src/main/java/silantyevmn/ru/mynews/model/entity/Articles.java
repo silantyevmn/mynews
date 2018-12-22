@@ -1,18 +1,24 @@
 package silantyevmn.ru.mynews.model.entity;
 
+import android.arch.persistence.room.Embedded;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Index;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
-import java.util.List;
 
 /**
  * Created by silan on 30.11.2018.
  */
-
-public class Articles implements Serializable{
+@Entity(tableName = "bookmarks", indices = {@Index(value = {"url"}, unique = true)})
+public class Articles implements Serializable {
     @SerializedName("source")
     @Expose
+    @Embedded(prefix = "source")
     private Source source;
 
     @SerializedName("author")
@@ -43,8 +49,18 @@ public class Articles implements Serializable{
     @Expose
     private String content;
 
-    public Articles(Source source, String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
-        this.source = source;
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Articles(String author, String title, String description, String url, String urlToImage, String publishedAt, String content) {
         this.author = author;
         this.title = title;
         this.description = description;
@@ -84,6 +100,10 @@ public class Articles implements Serializable{
 
     public String getContent() {
         return content;
+    }
+
+    public void setSource(Source source) {
+        this.source = source;
     }
 
     @Override
