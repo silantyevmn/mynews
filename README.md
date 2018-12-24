@@ -12,8 +12,10 @@
 
 ![home](/images/home_screen.jpg)
 ![home](/images/bookmarks_screen.jpg)
+
 ![home](/images/category_screen.jpg)
 ![home](/images/category_pop_screen.jpg)
+
 ![home](/images/search_screen.jpg)
 ![home](/images/web_screen.jpg)
 
