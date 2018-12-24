@@ -14,6 +14,7 @@ public class RepoNews implements Repo {
     private final String KEY_API = BuildConfig.ApiKey;
     private final String localeToCountry;
     private final int PAGE_SIZE = 100;
+    private final String SORT = "publishedAt";//relevancy, popularity, publishedAt.
     private ApiService api;
     private Cache cache;
 
@@ -30,7 +31,7 @@ public class RepoNews implements Repo {
 
     @Override
     public Observable<News> getSearchNews(String newText) {
-        return api.getNewsSearch(KEY_API, newText);
+        return api.getNewsSearch(KEY_API, newText, SORT);
     }
 
     @Override
