@@ -1,4 +1,5 @@
 # MyNews
+![logo](/images/myNews_logo.png)
 [![MyNews](/images/google-play-badge.png)](https://play.google.com/store/apps/details?id=silantyevmn.ru.mynews)
 
 Новости России и мира из разных источников.
@@ -10,13 +11,16 @@
 - Возможность добавить интересные новости в закладки;
 - Удобный интерфейс.
 
-![home](/images/home_screen.jpg)
-![home](/images/bookmarks_screen.jpg)
-
-![home](/images/category_screen.jpg)
-![home](/images/category_pop_screen.jpg)
-
-![home](/images/search_screen.jpg)
-![home](/images/web_screen.jpg)
-
 Будьте в курсе происходящего и не пропустите всё самое важное и интерсное!
+
+![home_screen](/images/home_screen.jpg)
+![bookmarks_screen](/images/bookmarks_screen.jpg)
+
+![category_screen](/images/category_screen.jpg)
+![category_pop_screen](/images/category_pop_screen.jpg)
+
+![search_screen](/images/search_screen.jpg)
+![web_screen](/images/web_screen.jpg)
+
+Api взят с ресурса NewsAPI.org
+
