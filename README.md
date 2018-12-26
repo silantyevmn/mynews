@@ -22,5 +22,21 @@
 ![search_screen](/images/search_screen.jpg)
 ![web_screen](/images/web_screen.jpg)
 
+# Используемый стэк
+
+- Dagger2
+- Moxy
+- Cicerone
+- RxJava2
+- CardView
+- RecyclerView
+- Retrofit2
+- OkHttp3
+- Picasso
+- PaperDb
+- Room
+- PrettyTime
+- Toasty.
+
 Api взят с ресурса NewsAPI.org
 
