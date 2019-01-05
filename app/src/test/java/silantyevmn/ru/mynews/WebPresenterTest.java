@@ -14,7 +14,6 @@ import io.reactivex.schedulers.TestScheduler;
 import silantyevmn.ru.mynews.model.entity.Articles;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.presenter.WebPresenter;
-import silantyevmn.ru.mynews.ui.adapter.IBookmark;
 import silantyevmn.ru.mynews.ui.view.WebNewsView;
 import silantyevmn.ru.mynews.utils.Messages;
 import silantyevmn.ru.mynews.utils.NetworkStatus;
@@ -23,8 +22,6 @@ import silantyevmn.ru.mynews.utils.PopupClass;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.timeout;
-import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
