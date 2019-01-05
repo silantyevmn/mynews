@@ -23,6 +23,7 @@ import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.presenter.WebPresenter;
 import silantyevmn.ru.mynews.ui.popup.PopupDialogMessage;
 import silantyevmn.ru.mynews.ui.view.WebNewsView;
+import silantyevmn.ru.mynews.utils.PopupClass;
 
 public class WebActivity extends MvpAppCompatActivity implements WebNewsView {
     public static final String KEY_WEB = "key_web";
@@ -41,7 +42,7 @@ public class WebActivity extends MvpAppCompatActivity implements WebNewsView {
 
     @ProvidePresenter
     public WebPresenter provideGeneralPresenter() {
-        return new WebPresenter(AndroidSchedulers.mainThread(), repo, (Articles) getIntent().getSerializableExtra(KEY_WEB));
+        return new WebPresenter(AndroidSchedulers.mainThread(), repo, new PopupClass(), (Articles) getIntent().getSerializableExtra(KEY_WEB));
     }
 
     @Override

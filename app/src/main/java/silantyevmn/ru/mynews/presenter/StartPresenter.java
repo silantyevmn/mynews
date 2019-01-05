@@ -46,12 +46,12 @@ public class StartPresenter extends MvpPresenter<StartView> {
         replaceScreen(titleToolbar, new Screens.BookmarksScreen());
     }
 
-    private void replaceScreen(String titleToolbar, SupportAppScreen supportAppScreen) {
+    public void replaceScreen(String titleToolbar, SupportAppScreen supportAppScreen) {
         router.replaceScreen(supportAppScreen);
         getViewState().initToolbar(titleToolbar);
     }
 
-    private void navigationToScreen(String titleToolbar, SupportAppScreen supportAppScreen) {
+    public void navigationToScreen(String titleToolbar, SupportAppScreen supportAppScreen) {
         router.navigateTo(supportAppScreen);
         getViewState().initToolbar(titleToolbar);
     }
