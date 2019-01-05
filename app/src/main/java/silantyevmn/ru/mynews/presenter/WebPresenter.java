@@ -4,13 +4,13 @@ import com.arellomobile.mvp.InjectViewState;
 import com.arellomobile.mvp.MvpPresenter;
 
 import io.reactivex.Scheduler;
+import io.reactivex.schedulers.Schedulers;
 import silantyevmn.ru.mynews.model.entity.Articles;
 import silantyevmn.ru.mynews.model.repo.Repo;
-import silantyevmn.ru.mynews.utils.PopupClass;
-import silantyevmn.ru.mynews.ui.adapter.IBookmark;
 import silantyevmn.ru.mynews.ui.view.WebNewsView;
 import silantyevmn.ru.mynews.utils.Messages;
 import silantyevmn.ru.mynews.utils.NetworkStatus;
+import silantyevmn.ru.mynews.utils.PopupClass;
 
 @InjectViewState
 public class WebPresenter extends MvpPresenter<WebNewsView> {
@@ -19,11 +19,11 @@ public class WebPresenter extends MvpPresenter<WebNewsView> {
     private Scheduler scheduler;
     private PopupClass pop;
 
-    public WebPresenter(Scheduler scheduler, Repo repo, Articles articles) {
+    public WebPresenter(Scheduler scheduler, Repo repo, PopupClass pop, Articles articles) {
         this.scheduler = scheduler;
         this.repo = repo;
         this.articles = articles;
-        this.pop = new PopupClass();
+        this.pop = pop;
     }
 
     @Override
@@ -34,17 +34,12 @@ public class WebPresenter extends MvpPresenter<WebNewsView> {
 
     public void loadWebNews() {
         //проверим избранное и отобразим значок
-        pop.getStatusBookmark(articles, new IBookmark() {
-            @Override
-            public void onSuccess(boolean isBookmark) {
-                getViewState().updateMenuItemBookmarkIcon(isBookmark);
-            }
-
-            @Override
-            public void onError(String message) {
-                getViewState().showError(message);
-            }
-        });
+        repo.findBookmark(articles)
+                .subscribeOn(Schedulers.io())
+                .observeOn(scheduler)
+                .subscribe(isBookmark -> {
+                    getViewState().updateMenuItemBookmarkIcon(isBookmark);
+                }, throwable -> getViewState().showError(Messages.getErrorStatusBookmark()));
         if (!NetworkStatus.isInternetAvailable()) {
             getViewState().showError(Messages.getErrorNoInternetConnection());
         } else {
@@ -59,22 +54,17 @@ public class WebPresenter extends MvpPresenter<WebNewsView> {
     }
 
     public void updateBookmark() {
-        pop.updateBookmark(articles, new IBookmark() {
-            @Override
-            public void onSuccess(boolean isBookmark) {
-                getViewState().updateMenuItemBookmarkIcon(isBookmark);
-                if (isBookmark) {
-                    getViewState().showSuccess(Messages.getBookmarkSuccessAdd());
-                } else {
-                    getViewState().showSuccess(Messages.getBookmarkSuccessRemove());
-                }
-            }
-
-            @Override
-            public void onError(String message) {
-                getViewState().showError(message);
-            }
-        });
+        repo.updateBookmark(articles)
+                .subscribeOn(Schedulers.io())
+                .observeOn(scheduler)
+                .subscribe(isBookmark -> {
+                    getViewState().updateMenuItemBookmarkIcon(isBookmark);
+                    if (isBookmark) {
+                        getViewState().showSuccess(Messages.getBookmarkSuccessAdd());
+                    } else {
+                        getViewState().showSuccess(Messages.getBookmarkSuccessRemove());
+                    }
+                }, throwable -> getViewState().showError(Messages.getErrorUpdateBookmark()));
     }
 
     public void openInBrowser() {
