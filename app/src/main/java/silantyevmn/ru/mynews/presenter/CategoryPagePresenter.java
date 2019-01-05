@@ -16,7 +16,6 @@ import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.ui.Screens;
 import silantyevmn.ru.mynews.ui.adapter.IAdapter;
 import silantyevmn.ru.mynews.ui.view.CategoryPageView;
-import silantyevmn.ru.mynews.ui.view.CategoryView;
 import silantyevmn.ru.mynews.utils.Messages;
 import silantyevmn.ru.mynews.utils.NetworkStatus;
 
