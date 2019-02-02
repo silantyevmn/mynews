@@ -1,16 +1,13 @@
 package silantyevmn.ru.mynews.ui.activity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.EditorInfo;
 import android.widget.TextView;
 
@@ -59,7 +56,7 @@ public class StartActivity extends MvpAppCompatActivity implements StartView {
         titleToolbar.setText(title);
     }
 
-    public Toolbar getToolbar(){
+    public Toolbar getToolbar() {
         return toolbar;
     }
 
@@ -79,18 +76,18 @@ public class StartActivity extends MvpAppCompatActivity implements StartView {
         if (savedInstanceState == null) {
             presenter.homeScreen(getString(R.string.title_home));
         }
-        BottomNavigationView bottomNavigationView= findViewById(R.id.bottom_navigation);
-        bottomNavigationView.setOnNavigationItemSelectedListener(item ->{
-            switch (item.getItemId()){
-                case R.id.navigation_home:{
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setOnNavigationItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.navigation_home: {
                     presenter.homeScreen(getString(R.string.title_home));
                     return true;
                 }
-                case R.id.navigation_category:{
+                case R.id.navigation_category: {
                     presenter.categoryScreen(getString(R.string.title_category));
                     return true;
                 }
-                case R.id.navigation_bookmarks:{
+                case R.id.navigation_bookmarks: {
                     presenter.bookmarksScreen(getString(R.string.title_bookmarks));
                     return true;
                 }
