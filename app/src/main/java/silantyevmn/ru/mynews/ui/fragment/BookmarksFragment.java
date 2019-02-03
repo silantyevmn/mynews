@@ -1,7 +1,6 @@
 package silantyevmn.ru.mynews.ui.fragment;
 
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
@@ -22,12 +21,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import ru.terrakok.cicerone.Router;
 import silantyevmn.ru.mynews.App;
 import silantyevmn.ru.mynews.R;
-import silantyevmn.ru.mynews.ui.image.ImageLoader;
 import silantyevmn.ru.mynews.model.repo.Repo;
 import silantyevmn.ru.mynews.presenter.BookmarksPresenter;
 import silantyevmn.ru.mynews.ui.activity.StartActivity;
 import silantyevmn.ru.mynews.ui.adapter.RecyclerAdapter;
 import silantyevmn.ru.mynews.ui.common.BackButtonListener;
+import silantyevmn.ru.mynews.ui.image.ImageLoader;
 import silantyevmn.ru.mynews.ui.popup.PopupDialogMessage;
 import silantyevmn.ru.mynews.ui.view.BookmarksView;
 
@@ -64,6 +63,7 @@ public class BookmarksFragment extends MvpAppCompatFragment implements Bookmarks
     public void onCreate(Bundle savedInstanceState) {
         App.getInstance().getComponent().inject(this);
         super.onCreate(savedInstanceState);
+        //throw new RuntimeException("test fabric.io");
     }
 
     @Nullable
